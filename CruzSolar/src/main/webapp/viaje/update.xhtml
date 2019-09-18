@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/WEB-INF/templates/master.xhtml">
+		<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							action="#{viajeController.saveViaje()}" ajax="false" />
+
+						<p:commandButton value="Regresar" icon="ui-icon-disk"
+							action="#{viajeController.listViaje()}" immediate="true"
+							ajax="false" />
+					</f:facet>
+				</p:toolbar>
+
+				<p:panelGrid id="panGridViajes" columns="1" style="width:100%">
+					<p:outputLabel value="Fecha Inicio:" for="txtFechaInicio" />
+					<p:inputText id="txtFechaInicio" required="true" maxlength="45"
+						value="#{viajeController.viaje.fechaInicio}" />
+
+					<p:outputLabel value="Fecha Final:" for="txtFechaFinal" />
+					<p:inputText id="txtFechaFinal" required="true" maxlength="45"
+						value="#{viajeController.viaje.fechaFinal}" />
+
+					<p:outputLabel value="Precio:" for="txtPrecio" />
+					<p:inputText id="txtPrecio" required="true" maxlength="45"
+						value="#{viajeController.viaje.precio}" />
+
+					<p:outputLabel value="Bus:" for="txtBus" />
+					<p:inputText id="txtBus" required="true" maxlength="45"
+						value="#{busController.busSelect.id}" />
+						
+					<p:dataTable id="datTabBuses"
+						emptyMessage="No existen buses de viaje registrados"
+						value="#{busController.buses}" var="bus" rowKey="#{bus.id}"
+						selectionMode="single" selection="#{busController.busSelect}"
+						paginator="true" rows="10">
+
+						<p:ajax event="rowSelect" 
+						listener="#{busController.selectBus}" />
+
+						<p:column headerText="Id">
+							<p:outputLabel value="#{bus.id}" />
+						</p:column>
+
+						<p:column headerText="Placa">
+							<p:outputLabel value="#{bus.placa}" />
+						</p:column>
+
+						<p:column headerText="N° de Asientos">
+							<p:outputLabel value="#{bus.asientos}" />
+						</p:column>
+
+						<p:column headerText="Disponible">
+							<p:outputLabel value="#{bus.disponible}" />
+						</p:column>
+
+					</p:dataTable>
+
+
+					<p:outputLabel value="Origen:" for="txtDepartamentoOrigen" />
+					<p:inputText id="txtDepartamentoOrigen" required="true"
+						maxlength="45"
+						value="#{viajeController.viaje.departamentoOrigen.name}" />
+
+					<p:outputLabel value="Destino:" for="txtDepartamentoDestino" />
+					<p:inputText id="txtDepartamentoDestino" required="true"
+						maxlength="45"
+						value="#{viajeController.viaje.departamentoDestino.name}" />
+
+				</p:panelGrid>
+				<br></br>
+
+
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

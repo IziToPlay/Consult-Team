@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="pageTitle">Taller</ui:insert></title>
+</h:head>
+
+<body>
+	<ui:insert name="header">
+		<h:form>
+			<p:menubar autoDisplay="false">
+				<p:submenu label="Mantenimiento" 
+							icon="ui-icon-pencil">
+					<p:menuitem icon="ui-icon-document" 
+					    value="Viajes"
+						url="/viaje/list.xhtml" />
+					<p:menuitem icon="ui-icon-document" 
+					    value="Ventas"
+						url="/venta/list.xhtml" />
+				</p:submenu>
+				
+				
+				<p:submenu label="Reportes" icon="ui-icon-pencil">
+					<p:menuitem icon="ui-icon-document" 
+					    value="Viajes"
+						url="/index.xhtml" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+	</ui:insert>
+
+	<ui:insert name="content">
+
+	</ui:insert>
+
+
+	<ui:insert name="footer">
+		<div>Cruz Solar SAC. Todos los derechos reservados</div>
+	</ui:insert>
+</body>
+
+</html>
