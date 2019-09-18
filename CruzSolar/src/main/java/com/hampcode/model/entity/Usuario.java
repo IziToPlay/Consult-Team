@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table(name = "cuentas")
-public class Cuenta {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,7 +87,7 @@ public class Cuenta {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cuenta other = (Cuenta) obj;
+		Usuario other = (Usuario) obj;
 		if (cargo == null) {
 			if (other.cargo != null)
 				return false;

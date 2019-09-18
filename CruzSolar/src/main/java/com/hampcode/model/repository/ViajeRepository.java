@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.hampcode.model.entity.Viaje;
-
 @Named
 public class ViajeRepository implements Serializable {
 	
@@ -20,31 +19,29 @@ public class ViajeRepository implements Serializable {
 	@PersistenceContext(unitName="pwPU")
 	private EntityManager em;
 	
-	public Long insert(Viaje viaje) throws Exception {
+	public void insert(Viaje viaje) throws Exception {
 		em.persist(viaje);
-		return viaje.getId();
 	}
 	
-	public Long delete(Viaje viaje) throws Exception {
-		return viaje.getId();
+	public void update(Viaje viaje) throws Exception{
+		em.merge(viaje);
 	}
 	
+	public void delete(Viaje viaje) throws Exception {
+		em.remove(viaje);
+	}
 	
 	public List<Viaje> findAll() throws Exception{
 		List<Viaje> viajes=new ArrayList<>();
 		
-		TypedQuery<Viaje> query=em.createQuery("FROM Viaje v"
-				,Viaje.class);
+		TypedQuery<Viaje> query=em.createQuery("FROM Viaje",Viaje.class);
 		viajes=query.getResultList();
 		
 		return viajes;
 	}
 	
 	
-	public Long update(Viaje viaje) throws Exception{
-		em.merge(viaje);
-		return viaje.getId();
-	}
+	
 	
 	public Optional<Viaje> findById(Long id) throws Exception{
 		Viaje viajeFound;

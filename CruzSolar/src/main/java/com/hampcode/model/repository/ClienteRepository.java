@@ -3,7 +3,6 @@ package com.hampcode.model.repository;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -11,20 +10,34 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.hampcode.model.entity.Cliente;
-import com.hampcode.model.entity.Viaje;
 
 @Named
-public class ClienteRepository  implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	List<Cliente> clientes=new ArrayList<>();
-	Cliente cliente;
+public class ClienteRepository implements Serializable {
 
-	public void ingresarCliente(long cantidad) throws Exception{
-		
-		for (long i=1; i<=cantidad; i++){
-			cliente=new Cliente();
-			clientes.add(cliente); 
-		}
+	private static final long serialVersionUID = 1L;
+
+	@PersistenceContext(unitName="pwPU")
+	private EntityManager em;
+
+	public void insert(Cliente cliente) throws Exception {
+      em.persist(cliente);
 	}
+	
+	public void update(Cliente cliente) throws Exception{
+		em.merge(cliente);
+	}
+	
+	public void delete(Cliente cliente) throws Exception{
+		em.remove(cliente);
+	}
+	
+	public List<Cliente> findAll()throws Exception{
+		List<Cliente> clientes=new ArrayList<>();
+		
+		TypedQuery<Cliente> query=em.createQuery("FROM Cliente", Cliente.class);
+		clientes=query.getResultList();
+		
+		return clientes;
+	}
+
 }
