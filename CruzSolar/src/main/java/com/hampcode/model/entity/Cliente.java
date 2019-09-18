@@ -3,30 +3,39 @@ package com.hampcode.model.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
-import javax.persistence.Id;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="clientes")
+@Table(name = "clientes")
 public class Cliente {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="nombre", nullable=false)
+
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
-	
-	@Column(name="apellido",nullable=false)
+
+	@Column(name = "apellido", nullable = false)
 	private String apellido;
-	
-	@Column(name="dni", nullable=false)
+
+	@Column(name = "dni", nullable = false)
 	private String dni;
-	
-	@Column(name="fechaNacimiento", nullable=false)
+
+	@Column(name = "fechaNacimiento", nullable = false)
 	private String fechaNacimiento;
-	
+
+	@Column(name = "correo", nullable = false)
+	private String correo;
+
+	@Column(name = "sexo", nullable = false)
+	private boolean sexo;
+
+	@Column(name = "celular", nullable = false)
+	private Long celular;
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -43,18 +52,6 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	@Column(name="correo", nullable=false)
-	private String correo;
-	
-	@Column(name="sexo", nullable=false)
-	private boolean sexo;
-	
-	@Column(name="telefono", nullable=false)
-	private Long telefono;
-	
-	@Column(name="celular", nullable=false)
-	private Long celular;
-
 	public Long getId() {
 		return id;
 	}
@@ -62,7 +59,6 @@ public class Cliente {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getDni() {
 		return dni;
@@ -96,19 +92,11 @@ public class Cliente {
 		this.sexo = sexo;
 	}
 
-	public Long getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(Long telefono) {
-		this.telefono = telefono;
-	}
-
 	public Long getCelular() {
 		return celular;
 	}
 
 	public void setCelular(Long celular) {
 		this.celular = celular;
-	}	
+	}
 }
