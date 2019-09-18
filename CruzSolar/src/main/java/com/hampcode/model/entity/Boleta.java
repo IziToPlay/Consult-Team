@@ -10,26 +10,38 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name="boletas")
+@Table(name = "boletas")
 public class Boleta {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name="empleado_id")
-	private Empleado empleado;
-		
-	@JoinColumn(name="viaje_id")
-	private Viaje viaje;
-	
-	@ManyToOne
-	@JoinColumn(name="cliente_id")
-	private Cliente cliente;
-	
-	@Column(name="monto",nullable=false)
+
+	@Column(name = "monto", nullable = false)
 	private double monto;
+
+	@Column(name = "fechaEmision", nullable = false)
+	private String fechaEmision;
+
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name = "empleado_id")
+	private Empleado empleado;
+
+	@ManyToOne
+	@JoinColumn(name = "bus_id")
+	private Bus bus;
+
+	@ManyToOne
+	@JoinColumn(name = "asiento_id")
+	private Asiento asiento;
+
+	@ManyToOne
+	@JoinColumn(name = "viaje_id")
+	private Viaje viaje;
 
 	public Long getId() {
 		return id;
@@ -70,6 +82,5 @@ public class Boleta {
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
-	
+
 }
-	
