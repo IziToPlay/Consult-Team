@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.transaction.Transactional;
 
 import com.hampcode.model.entity.Bus;
 import com.hampcode.model.repository.BusRepository;
@@ -17,12 +16,7 @@ public class BusBusiness implements Serializable {
 
 	@Inject
 	private BusRepository busRepository;
-	
-	@Transactional
-	public Long update(Bus bus) throws Exception {
-		return busRepository.update(bus);
-	}
-	
+
 	public List<Bus> getAll() throws Exception {
 		return busRepository.findAll();
 	}

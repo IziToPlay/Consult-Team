@@ -20,24 +20,26 @@ public class ViajeBusiness implements Serializable {
 	private ViajeRepository viajeRepository;
 	
 	
-	@Transactional 
-	public Long insert(Viaje viaje) throws Exception {
-		return viajeRepository.insert(viaje);
+	@Transactional
+	public void insert(Viaje viaje) throws Exception {
+		viajeRepository.insert(viaje);
 	}
 	
 	@Transactional
-	public Long delete(Viaje viaje) throws Exception{
-		return viajeRepository.delete(viaje);
+	public void update(Viaje viaje)throws Exception{
+		 viajeRepository.update(viaje);
 	}
 	
 	@Transactional
-	public Long update(Viaje viaje)throws Exception{
-		return viajeRepository.update(viaje);
+	public void delete(Viaje viaje) throws Exception{
+		 viajeRepository.delete(viaje);
 	}
 	
 	public List<Viaje> getAll() throws Exception {
 		return viajeRepository.findAll();
 	}
+	
+	
 	
 	public Optional<Viaje> getViajesById(long id) throws Exception{
 		return viajeRepository.findById(id);
