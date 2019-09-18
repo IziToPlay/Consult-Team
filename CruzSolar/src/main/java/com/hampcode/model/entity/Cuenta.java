@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "cuentas")
+public class Cuenta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,6 +68,37 @@ public class Usuario {
 
 	public void setClave(String clave) {
 		this.clave = clave;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cargo == null) ? 0 : cargo.hashCode());
+		result = prime * result + ((empleado == null) ? 0 : empleado.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cuenta other = (Cuenta) obj;
+		if (cargo == null) {
+			if (other.cargo != null)
+				return false;
+		} else if (!cargo.equals(other.cargo))
+			return false;
+		if (empleado == null) {
+			if (other.empleado != null)
+				return false;
+		} else if (!empleado.equals(other.empleado))
+			return false;
+		return true;
 	}
 
 }

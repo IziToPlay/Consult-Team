@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "viajes")
-
 public class Viaje {
 
 	@Id
@@ -38,6 +37,22 @@ public class Viaje {
 	@ManyToOne
 	@JoinColumn(name = "empleado_id")
 	private Empleado empleado;
+
+	public Departamento getDptoOrigen() {
+		return dptoOrigen;
+	}
+
+	public void setDptoOrigen(Departamento dptoOrigen) {
+		this.dptoOrigen = dptoOrigen;
+	}
+
+	public Departamento getDptoDestino() {
+		return dptoDestino;
+	}
+
+	public void setDptoDestino(Departamento dptoDestino) {
+		this.dptoDestino = dptoDestino;
+	}
 
 	public Long getId() {
 		return id;
