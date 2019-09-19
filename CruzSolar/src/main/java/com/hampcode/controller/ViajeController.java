@@ -13,7 +13,7 @@ import org.primefaces.event.SelectEvent;
 
 import com.hampcode.business.DepartamentoBusiness;
 import com.hampcode.business.ViajeBusiness;
-import com.hampcode.model.entity.Bus;
+
 import com.hampcode.model.entity.Departamento;
 import com.hampcode.model.entity.Viaje;
 import com.hampcode.util.Message;

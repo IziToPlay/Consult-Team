@@ -3,32 +3,33 @@ package com.hampcode.model.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "cuentas")
+@Table(name = "usuarios")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "cargo_id")
+	private Cargo cargo;
 
+	@ManyToOne
+	@JoinColumn(name = "empleado_id")
+	private Empleado empleado;
+	
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 
 	@Column(name = "clave", nullable = false)
 	private String clave;
-
-	@ManyToOne
-	@Column(name = "cargo_id", nullable = false)
-	private Cargo cargo;
-
-	@ManyToOne
-	@Column(name = "empleado_id", nullable = false)
-	private Empleado empleado;
 
 	public Long getId() {
 		return id;

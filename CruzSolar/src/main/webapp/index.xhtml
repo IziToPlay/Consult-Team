@@ -10,32 +10,8 @@
 
 	<ui:composition template="/WEB-INF/templates/master.xhtml">
 		<ui:define name="content">
-			
 			<h:form id="frm">
-			  		<div>
-			            <img src="http://bemidjibus.com/wp-content/uploads/2017/01/logo_bemidjibus.png" 
-			            style="margin-left:39%; margin-top:5%;" height="190px" width="390px" />
-		 			</div>
-		 			
-		 			<div><p>
-			 			<p:outputLabel style="margin-left:39%; margin-top:2%;" value="Usuario:" for="txtUsuario" />
-						<p:inputText id="txtUsuario" required="true" maxlength="45" style="margin-left:43px; margin-top:2%; " 
-							value="#{empleadoController.filterUsuario}" />  
-						</p>
-					</div>	
-					<div>
-						<p:outputLabel style="margin-left:39%; margin-top:20px;" value="Contraseña:" for="txtContraseña" />
-						<p:inputText id="txtContraseña" required="true" maxlength="45" style="margin-left:10px; margin-top:20px"
-							value="#{empleadoController.filterContrasenia}" />
-					</div>		
-		    		<div>
-			    		<p >
-			    		<p:commandButton value="Ingresar" style="margin-left:52.7%;"
-							  action="#{productController.listProduct()}"
-							  immediate="true"
-							  ajax="true"/>
-						</p>
-					</div>
+				
 			</h:form>
 		</ui:define>
 	</ui:composition>
