@@ -37,11 +37,5 @@ public class ClienteController implements Serializable  {
 		//getAllClientes();
 	}
 	
-	public void getAllClientes() {
-		try {
-			clientes = clienteBusiness.getAll();
-		} catch (Exception e) {
-			Message.messageError("Error Carga de Clientes:" + e.getMessage());
-		}
-	}
+	
 }
