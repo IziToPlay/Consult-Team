@@ -53,7 +53,7 @@ public class BoletaController  implements Serializable  {
 			Message.messageError("Error Carga de Boletas de Ventas:" + e.getMessage());
 		}
 	}
-	
+
 	public String newBoleta() {
 		resetForm();
 		return "list.xhtml";
