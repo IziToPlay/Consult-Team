@@ -36,12 +36,14 @@ public class BoletaController  implements Serializable  {
 	private Empleado empleado;
 	private AsientoViaje asientoViaje;
 	private Cliente cliente;
+	private Viaje viaje;
 	@PostConstruct
 	public void init() {
 		boleta = new Boleta();
 		empleado=new Empleado();
 		asientoViaje = new AsientoViaje();
 		cliente= new Cliente();
+		viaje= new Viaje();
 		boletas=new ArrayList<Boleta>();
 		//getAllBoletas();
 	}
@@ -66,17 +68,22 @@ public class BoletaController  implements Serializable  {
 			}
 			this.getAllBoletas();
 			resetForm();
-			view = "list";
+			view = "boleta/list.xhtml";
 		} catch (Exception e) {
 			Message.messageError("Error Boleta de Viaje:" + e.getMessage());
 		}
 		return view;
 	}
+	
 	public String newBoleta() {
 		resetForm();
-		return "list.xhtml";
+		return "boleta/insert.xhtml";
 	}
 	
+	public String listBoleta() {
+		resetForm();
+		return "boleta/list.xhtml";
+	}
 	public void resetForm() {
 		this.boleta = new Boleta();
 	}

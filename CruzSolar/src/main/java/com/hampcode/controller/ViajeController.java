@@ -47,11 +47,11 @@ public class ViajeController implements Serializable {
 	
 	public String newViaje() {		
 		resetForm();
-		return "insert.xhtml";
+		return "viaje/insert.xhtml";
 	}
 	
 	public String listViaje() {
-		return "list.xhtml";
+		return "viaje/list.xhtml";
 	}
 
 
