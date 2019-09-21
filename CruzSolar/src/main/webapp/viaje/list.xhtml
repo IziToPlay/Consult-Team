@@ -61,17 +61,14 @@
 					<p:column headerText="Fecha Final">
 						<p:outputLabel value="#{viaje.fechaFinal}" />
 					</p:column>
-					<p:column headerText="Bus">
-						<p:outputLabel value="#{viaje.bus.id}" />
-					</p:column>
 					<p:column headerText="Precio">
 						<p:outputLabel value="#{viaje.precio}" />
 					</p:column>
 					<p:column headerText="Origen">
-						<p:outputLabel value="#{viaje.departamentoOrigen.name}" />
+						<p:outputLabel value="#{viaje.dptoOrigen.nombre}" />
 					</p:column>
 					<p:column headerText="Destino">
-						<p:outputLabel value="#{viaje.departamentoDestino.name}" />
+						<p:outputLabel value="#{viaje.dptoDestino.nombre}" />
 					</p:column>
 				</p:dataTable>
 
