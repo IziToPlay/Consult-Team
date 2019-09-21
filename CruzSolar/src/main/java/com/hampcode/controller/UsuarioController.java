@@ -46,6 +46,32 @@ public class UsuarioController implements Serializable {
 				Message.messageError("Error Usuario search :" + e.getMessage());
 		}
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getFilterNombre() {
+		return filterNombre;
+	}
+
+	public void setFilterNombre(String filterNombre) {
+		this.filterNombre = filterNombre;
+	}
+
+	public String getFilterClave() {
+		return filterClave;
+	}
+
+	public void setFilterClave(String filterClave) {
+		this.filterClave = filterClave;
+	}
+	
+	
 }
 				
 			
