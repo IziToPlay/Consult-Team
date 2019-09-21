@@ -18,10 +18,11 @@ import com.hampcode.model.entity.Cliente;
 import com.hampcode.model.entity.Departamento;
 import com.hampcode.model.entity.Empleado;
 import com.hampcode.model.entity.Viaje;
+import com.hampcode.util.Message;
 
 @Named
 @SessionScoped
-public class BoletaController {
+public class BoletaController  implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -43,5 +44,42 @@ public class BoletaController {
 		cliente= new Cliente();
 		boletas=new ArrayList<Boleta>();
 		//getAllBoletas();
+	}
+	
+	public void getAllBoletas() {
+		try {
+			boletas = boletaBusiness.getAll();
+		} catch (Exception e) {
+			Message.messageError("Error Carga de Boletas de Ventas:" + e.getMessage());
+		}
+	}
+	
+	public String newBoleta() {
+		resetForm();
+		return "list.xhtml";
+	}
+	
+	public void resetForm() {
+		this.boleta = new Boleta();
+	}
+	
+	public String saveBoleta() {
+		String view = "";
+		try {
+			if (boleta.getId() != null) {
+				boletaBusiness.update(boleta);
+				Message.messageInfo("Registro actualizado exitosamente");
+			} else {
+				boletaBusiness.insert(boleta);
+				Message.messageInfo("Registro guardado exitosamente");
+
+			}
+			this.getAllBoletas();
+			resetForm();
+			view = "list";
+		} catch (Exception e) {
+			Message.messageError("Error Boleta:" + e.getMessage());
+		}
+		return view;
 	}
 }
