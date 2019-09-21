@@ -54,6 +54,24 @@ public class BoletaController  implements Serializable  {
 		}
 	}
 
+	public String saveBoleta() {
+		String view = "";
+		try {
+			if (boleta.getId() != null) {
+				boletaBusiness.update(boleta);
+				Message.messageInfo("Boleta de viaje actualizada correctamente");
+			} else {
+				boletaBusiness.insert(boleta);
+				Message.messageInfo("Boleta de viaje registrada correctamente");
+			}
+			this.getAllBoletas();
+			resetForm();
+			view = "list";
+		} catch (Exception e) {
+			Message.messageError("Error Boleta de Viaje:" + e.getMessage());
+		}
+		return view;
+	}
 	public String newBoleta() {
 		resetForm();
 		return "list.xhtml";
@@ -63,23 +81,4 @@ public class BoletaController  implements Serializable  {
 		this.boleta = new Boleta();
 	}
 	
-	public String saveBoleta() {
-		String view = "";
-		try {
-			if (boleta.getId() != null) {
-				boletaBusiness.update(boleta);
-				Message.messageInfo("Registro actualizado exitosamente");
-			} else {
-				boletaBusiness.insert(boleta);
-				Message.messageInfo("Registro guardado exitosamente");
-
-			}
-			this.getAllBoletas();
-			resetForm();
-			view = "list";
-		} catch (Exception e) {
-			Message.messageError("Error Boleta:" + e.getMessage());
-		}
-		return view;
-	}
 }
