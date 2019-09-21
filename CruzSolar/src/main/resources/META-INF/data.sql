@@ -32,9 +32,6 @@ INSERT INTO asientos(piso,bus_id) VALUES (2,1);
 INSERT INTO asientos(piso,bus_id) VALUES (2,1);
 INSERT INTO asientos(piso,bus_id) VALUES (2,1);
 
-INSERT INTO asientos_viajes(bus_id,asiento_id,viaje_id,disponible) VALUES (1,1,8,true);
-INSERT INTO asientos_viajes(bus_id,asiento_id,viaje_id,disponible) VALUES (1,3,8,false);
-
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-12-30 12:38:00','2019-12-30 20:38:00', 48.00, 1,2,3);
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-12-10 07:00:00','2019-12-11 13:38:00', 100.00, 1,3,3);
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-10-26 12:38:00','2019-10-28 06:38:00', 50.00, 2,7,3);
@@ -44,11 +41,12 @@ INSERT INTO viajes (fechaInicio,fechaFinal,precio,dptoOrigen_id,dptoDestino_id,e
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-08-12 12:38:00','2019-08-12 23:38:00', 90.00, 6,7,3);
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-09-11 12:38:00','2019-09-12 11:38:00', 80.00, 1,8,3);
 
-
+INSERT INTO asientos_viajes(bus_id,asiento_id,viaje_id,disponible) VALUES (1,1,7,true);
+INSERT INTO asientos_viajes(bus_id,asiento_id,viaje_id,disponible) VALUES (1,3,8,false);
 
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('lovon98','123456',1,1);
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('angelupc','123456',1,2);
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('mezacuba','123456',2,3);
 
 
-INSERT INTO boletas(monto,fechaEmision,cliente_id,viaje_id,empleado_id,asiento_id,bus_id) VALUES (80,'2019-08-10 09:03:00',1,1,1,1,8);
+INSERT INTO boletas(monto,fechaEmision,cliente_id,viaje_id,empleado_id,asiento_id,bus_id) VALUES (80.00,'2019-08-10 09:03:00',1,1,1,1,5);
