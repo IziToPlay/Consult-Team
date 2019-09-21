@@ -80,5 +80,65 @@ public class BoletaController  implements Serializable  {
 	public void resetForm() {
 		this.boleta = new Boleta();
 	}
+
+	public BoletaBusiness getBoletaBusiness() {
+		return boletaBusiness;
+	}
+
+	public void setBoletaBusiness(BoletaBusiness boletaBusiness) {
+		this.boletaBusiness = boletaBusiness;
+	}
+
+	public Boleta getBoleta() {
+		return boleta;
+	}
+
+	public void setBoleta(Boleta boleta) {
+		this.boleta = boleta;
+	}
+
+	public List<Boleta> getBoletas() {
+		return boletas;
+	}
+
+	public void setBoletas(List<Boleta> boletas) {
+		this.boletas = boletas;
+	}
+
+	public Boleta getBoletaSelect() {
+		return boletaSelect;
+	}
+
+	public void setBoletaSelect(Boleta boletaSelect) {
+		this.boletaSelect = boletaSelect;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public AsientoViaje getAsientoViaje() {
+		return asientoViaje;
+	}
+
+	public void setAsientoViaje(AsientoViaje asientoViaje) {
+		this.asientoViaje = asientoViaje;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
