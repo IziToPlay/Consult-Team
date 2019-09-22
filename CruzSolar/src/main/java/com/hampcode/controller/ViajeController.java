@@ -36,14 +36,16 @@ public class ViajeController implements Serializable {
 	private Viaje viajeSelect;
 	private String filterName; // Por el momento se busca por Destino
 
-	private Departamento departamento;
+	private Departamento departamentoOrigen;
+	private Departamento departamentoDestino;
 	private List<Departamento> departamentos;
 	private Departamento departamentoSelect;
 	
 	@PostConstruct
 	public void init() {
 		viaje = new Viaje();
-		departamento=new Departamento();
+		departamentoOrigen=new Departamento();
+		departamentoDestino=new Departamento();
 		
 		viajes = new ArrayList<Viaje>();
 	    departamentos = new ArrayList<Departamento>();
@@ -55,11 +57,11 @@ public class ViajeController implements Serializable {
 	
 	public String newViaje() {		
 		resetForm();
-		return "viaje/insert.xhtml";
+		return "new.xhtml";
 	}
 	
 	public String listViaje() {
-		return "viaje/list.xhtml";
+		return "list.xhtml";
 	}
 
 
@@ -69,14 +71,20 @@ public class ViajeController implements Serializable {
 			if (viaje.getId() != null) {
 				viajeBusiness.update(viaje);
 				Message.messageInfo("Registro actualizado exitosamente");
+				view = "list";
 			} else {
-				viajeBusiness.insert(viaje);
-				Message.messageInfo("Registro guardado exitosamente");
-
+				if(departamentoDestino.getNombre()==departamentoOrigen.getNombre()) Message.messageError("Origen y Destino no deben ser iguales");
+				else {
+					viaje.setDptoDestino(departamentoDestino);
+					viaje.setDptoOrigen(departamentoOrigen);
+					viajeBusiness.insert(viaje);				
+					Message.messageInfo("El viaje se ha registrado exitosamente");
+					view = "list";
+				}
 			}
 			this.getAllViajes();
 			resetForm();
-			view = "list";
+			
 		} catch (Exception e) {
 			Message.messageError("Error Viaje:" + e.getMessage());
 		}
@@ -156,6 +164,8 @@ public class ViajeController implements Serializable {
 	public void resetForm() {
 		this.filterName = "";
 		this.viaje = new Viaje();
+		this.departamentoOrigen = new Departamento();
+		this.departamentoDestino = new Departamento();
 	}
 
 	public Viaje getViaje() {
@@ -209,14 +219,6 @@ public class ViajeController implements Serializable {
 		this.departamentoBusiness = departamentoBusiness;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-
 	public List<Departamento> getDepartamentos() {
 		return departamentos;
 	}
@@ -231,6 +233,22 @@ public class ViajeController implements Serializable {
 
 	public void setDepartamentoSelect(Departamento departamentoSelect) {
 		this.departamentoSelect = departamentoSelect;
+	}
+
+	public Departamento getDepartamentoOrigen() {
+		return departamentoOrigen;
+	}
+
+	public void setDepartamentoOrigen(Departamento departamentoOrigen) {
+		this.departamentoOrigen = departamentoOrigen;
+	}
+
+	public Departamento getDepartamentoDestino() {
+		return departamentoDestino;
+	}
+
+	public void setDepartamentoDestino(Departamento departamentoDestino) {
+		this.departamentoDestino = departamentoDestino;
 	}
 	
 	

@@ -13,43 +13,61 @@
 			<h:form id="frm">
 				<p:growl id="men" />
 
-				<p:panelGrid id="panGridProduct" columns="2" style="width:100%">
-					<p:outputLabel value="Viaje:" for="txtName" />
-					<p:inputText id="txtName" required="true" maxlength="45"
-						value="#{productController.product.name}" />
+				
+					<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Guardar" icon="ui-icon-disk" 
+						action="#{viajeController.saveViaje()}" ajax="false"/>
+
+						<p:commandButton value="Regresar" icon="ui-icon-disk"
+						  action="#{viajeController.listViaje()}"
+						  immediate="true"
+						  ajax="false"/>
+					</f:facet>
+					</p:toolbar>
+					
+					
+					<p:panelGrid id="panGridProduct" columns="2" style="width:100%">
 					
 					<p:outputLabel value="Origen" for="cboOrigen" />
 					<p:selectOneMenu id="cboOrigen" required="true" effect="drop"
-						value="#{viajeController.departamento}"
+						value="#{viajeController.departamentoOrigen}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem itemLabel="Seleccione una opción"
 							noSelectionOption="true" itemValue="" />
 						<f:selectItems value="#{viajeController.departamentos}"
-							var="departamento" itemLabel="#{departamento.name}"
-							itemValue="#{departamento}" />
+							var="departamentoOrigen" itemLabel="#{departamentoOrigen.nombre}"
+							itemValue="#{departamentoOrigen}" />
 					</p:selectOneMenu>
 					
-					<p:outputLabel value="Proveedor" for="cboSupplier" />
-					<p:selectOneMenu id="cboSupplier" required="true" effect="drop"
-						value="#{productController.supplier}"
+					<p:outputLabel value="Destino" for="cboDestino" />
+					<p:selectOneMenu id="cboDestino" required="true" effect="drop"
+						value="#{viajeController.departamentoDestino}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem itemLabel="Seleccione una opción"
 							noSelectionOption="true" itemValue="" />
-						<f:selectItems value="#{productController.suppliers}"
-							var="supplier" itemLabel="#{supplier.name}"
-							itemValue="#{supplier}" />
+						<f:selectItems value="#{viajeController.departamentos}"
+							var="departamentoDestino" itemLabel="#{departamentoDestino.nombre}"
+							itemValue="#{departamentoDestino}" />
 					</p:selectOneMenu>
 					
-					<p:outputLabel value="Categoria" for="txtCategory" />
-					<p:inputText id="txtCategory" required="true" maxlength="45"
-						value="#{productController.product.category}" />
-					<p:outputLabel value="Precio Unitario" for="txtUnitPrice" />
-					<p:inputText id="txtUnitPrice" required="true" maxlength="45"
-						value="#{productController.product.unitPrice}" />
-					<p:outputLabel value="Stock" for="txtStock" />
-					<p:inputText id="txtStock" required="true" maxlength="45"
-						value="#{productController.product.unitsInStock}" />
-				</p:panelGrid>
+					
+					<p:outputLabel value="Precio" for="txtPrecio" />
+					<p:inputText id="txtPrecio" required="true" maxlength="45"
+						value="#{viajeController.viaje.precio}" />
+						
+					<p:outputLabel value="Fecha inicial" for="txtfechaInicio" />
+					<p:inputText id="txtfechaInicio" required="true" maxlength="45"
+						value="#{viajeController.viaje.fechaInicio}" />
+						
+					<p:outputLabel value="Fecha final" for="txtfechaFinal" />
+					<p:inputText id="txtfechaFinal" required="true" maxlength="45"
+						value="#{viajeController.viaje.fechaFinal}" />
+						
+					
+					
+					
+					</p:panelGrid>
 				<br></br>
 			
 
