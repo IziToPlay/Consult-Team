@@ -37,12 +37,20 @@ public class ViajeController implements Serializable {
 	private String filterName; // Por el momento se busca por Destino
 
 	private Departamento departamento;
+	private List<Departamento> departamentos;
+	private Departamento departamentoSelect;
+	
 	@PostConstruct
 	public void init() {
 		viaje = new Viaje();
 		departamento=new Departamento();
+		
 		viajes = new ArrayList<Viaje>();
+	    departamentos = new ArrayList<Departamento>();
+	    
 		getAllViajes();
+		getAllDepartamentos();
+		
 	}
 	
 	public String newViaje() {		
@@ -93,6 +101,7 @@ public class ViajeController implements Serializable {
 		return view;
 	}
 
+	
 	public void getAllViajes() {
 		try {
 			viajes = viajeBusiness.getAll();
@@ -100,7 +109,16 @@ public class ViajeController implements Serializable {
 			Message.messageError("Error Carga de Rutas de Viaje:" + e.getMessage());
 		}
 	}
+	
+	public void getAllDepartamentos() {
+		try {
+			this.departamentos= departamentoBusiness.getAll();
+		} catch (Exception e) {
+			Message.messageError("Error Cargar de Departamentos " + e.getMessage());
+		}
+	}
 
+	
 	public void selectViaje(SelectEvent e) {
 		this.viajeSelect = (Viaje) e.getObject();
 	}
@@ -198,5 +216,23 @@ public class ViajeController implements Serializable {
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
+
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+
+	public void setDepartamentos(List<Departamento> departamentos) {
+		this.departamentos = departamentos;
+	}
+
+	public Departamento getDepartamentoSelect() {
+		return departamentoSelect;
+	}
+
+	public void setDepartamentoSelect(Departamento departamentoSelect) {
+		this.departamentoSelect = departamentoSelect;
+	}
+	
+	
 
 }

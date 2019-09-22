@@ -31,7 +31,7 @@ public class UsuarioController implements Serializable {
 	}
 	
 	public String iniciarSesion() {
-		return "/viaje/list.xhtml";
+		return "/viaje/new.xhtml";
 	}
 	
 	public void searchUsuarioByNombreyClave() {
