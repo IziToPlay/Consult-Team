@@ -27,6 +27,10 @@ public class Viaje {
 	private double precio;
 
 	@ManyToOne
+	@JoinColumn(name = "bus_id")
+	private Bus bus;
+
+	@ManyToOne
 	@JoinColumn(name = "dptoOrigen_id")
 	private Departamento dptoOrigen;
 
@@ -94,4 +98,11 @@ public class Viaje {
 		this.empleado = empleado;
 	}
 
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
+	}
 }

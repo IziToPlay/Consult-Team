@@ -251,6 +251,4 @@ public class ViajeController implements Serializable {
 		this.departamentoDestino = departamentoDestino;
 	}
 	
-	
-
-}
+	}

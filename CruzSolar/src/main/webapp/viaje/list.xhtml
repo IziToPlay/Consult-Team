@@ -15,15 +15,12 @@
 
 				<p:toolbar>
 					<f:facet name="right">
-						<p:commandButton value="Nuevo" icon="ui-icon-disk" 
-						action='#{viajeController.newViaje()}'
-						ajax="false"/>
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+							action='#{viajeController.newViaje()}' ajax="false" />
 						<p:commandButton value="Editar" icon="ui-icon-disk"
-						action="#{viajeController.editViaje()}"
-						  ajax="false"/>
-						  <p:commandButton value="Eliminar" icon="ui-icon-disk"
-						action="#{viajeController.deleteViaje()}"
-						  ajax="false"/>		
+							action="#{viajeController.editViaje()}" ajax="false" />
+						<p:commandButton value="Eliminar" icon="ui-icon-disk"
+							action="#{viajeController.deleteViaje()}" ajax="false" />
 
 					</f:facet>
 				</p:toolbar>
@@ -31,27 +28,23 @@
 
 				<p:panelGrid id="panGriBuscador" columns="3" style="width:100%">
 					<p:outputLabel value="Buscar Por Destino:" for="txtSearchName" />
-					<p:inputText id="txtSearchName"  value="#{viajeController.filterName}" />
-					<p:commandButton icon="ui-icon-search" 
-					  actionListener="#{viajeController.searchViajeByName}"
-					  update=":frm:datTabViajes :frm:men"/>
+					<p:inputText id="txtSearchName"
+						value="#{viajeController.filterName}" />
+					<p:commandButton icon="ui-icon-search"
+						actionListener="#{viajeController.searchViajeByName}"
+						update=":frm:datTabViajes :frm:men" />
 				</p:panelGrid>
-				
+
 
 
 				<p:dataTable id="datTabViajes"
 					emptyMessage="No existen rutas de viaje registradas"
-					value="#{viajeController.viajes}" var="viaje"
-					
-					rowKey="#{viaje.id}"
-					selectionMode="single"
-					selection="#{viajeController.viajeSelect}"
-					
+					value="#{viajeController.viajes}" var="viaje" rowKey="#{viaje.id}"
+					selectionMode="single" selection="#{viajeController.viajeSelect}"
 					paginator="true" rows="10">
 
-					<p:ajax event="rowSelect"
-						listener="#{viajeController.selectViaje}" />
-						
+					<p:ajax event="rowSelect" listener="#{viajeController.selectViaje}" />
+
 					<p:column headerText="Id">
 						<p:outputLabel value="#{viaje.id}" />
 					</p:column>
@@ -60,6 +53,9 @@
 					</p:column>
 					<p:column headerText="Fecha Final">
 						<p:outputLabel value="#{viaje.fechaFinal}" />
+					</p:column>
+					<p:column headerText="Bus">
+						<p:outputLabel value="#{viaje.bus.id}" />
 					</p:column>
 					<p:column headerText="Precio">
 						<p:outputLabel value="#{viaje.precio}" />
@@ -72,7 +68,7 @@
 					</p:column>
 				</p:dataTable>
 
-			
+
 
 
 			</h:form>
