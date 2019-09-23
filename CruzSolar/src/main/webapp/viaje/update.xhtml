@@ -40,9 +40,20 @@
 					<p:inputText id="txtPrecio" required="true" maxlength="45"
 						value="#{viajeController.viaje.precio}" />
 
-					<p:outputLabel value="Lugar Origen:" for="txtLugarOrigen" />
-					<p:inputText id="txtLugarOrigen" required="true" maxlength="45"
-						value="#{viajeController.viaje.dptoOrigen.nombre}" />
+					<p:outputLabel value="Lugar Origen:" for="cboLugarOrigen" />
+					<p:selectOneMenu id="cboLugarOrigen" required="true" effect="drop"
+						value="#{viajeController.departamentoOrigen}"
+						convert="omnifaces.SelectItemsConverter">
+
+						<f:selectItem
+							itemLabel="#{viajeController.viaje.dptoOrigen.nombre}"
+							noSelectionOption="true" itemValue="" />
+
+						<f:selectItems value="#{viajeController.departamentos}"
+							var="departamentoOrigen" itemLabel="#{departamentoOrigen.nombre}"
+							itemValue="#{departamentoOrigen}" />
+
+					</p:selectOneMenu>
 
 					<p:outputLabel value="Lugar Destino:" for="cboLugarDestino" />
 					<p:selectOneMenu id="cboLugarDestino" required="true" effect="drop"
