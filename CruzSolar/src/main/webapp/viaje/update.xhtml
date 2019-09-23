@@ -36,6 +36,10 @@
 					<p:inputText id="txtFechaFinal" required="true" maxlength="45"
 						value="#{viajeController.viaje.fechaFinal}" />
 
+					<p:outputLabel value="Bus:" for="txtBus" />
+					<p:inputText id="txtBus" required="true" maxlength="45"
+						value="#{viajeController.viaje.bus.id}" />
+
 					<p:outputLabel value="Precio:" for="txtPrecio" />
 					<p:inputText id="txtPrecio" required="true" maxlength="45"
 						value="#{viajeController.viaje.precio}" />
@@ -65,7 +69,8 @@
 							noSelectionOption="true" itemValue="" />
 
 						<f:selectItems value="#{viajeController.departamentos}"
-							var="departamentoDestino" itemLabel="#{departamentoDestino.nombre}"
+							var="departamentoDestino"
+							itemLabel="#{departamentoDestino.nombre}"
 							itemValue="#{departamentoDestino}" />
 
 					</p:selectOneMenu>
