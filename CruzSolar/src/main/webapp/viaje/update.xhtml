@@ -15,16 +15,19 @@
 
 				<p:toolbar>
 					<f:facet name="right">
+
 						<p:commandButton value="Guardar" icon="ui-icon-disk"
 							action="#{viajeController.saveViaje()}" ajax="false" />
 
 						<p:commandButton value="Regresar" icon="ui-icon-disk"
 							action="#{viajeController.listViaje()}" immediate="true"
 							ajax="false" />
+
 					</f:facet>
 				</p:toolbar>
 
-				<p:panelGrid id="panGridViajes" columns="1" style="width:100%">
+				<p:panelGrid id="panGridViajes" columns="2" style="width:100%">
+
 					<p:outputLabel value="Fecha Inicio:" for="txtFechaInicio" />
 					<p:inputText id="txtFechaInicio" required="true" maxlength="45"
 						value="#{viajeController.viaje.fechaInicio}" />
@@ -37,42 +40,27 @@
 					<p:inputText id="txtPrecio" required="true" maxlength="45"
 						value="#{viajeController.viaje.precio}" />
 
-					<p:outputLabel value="Bus:" for="txtBus" />
-					<p:inputText id="txtBus" required="true" maxlength="45"
-						value="#{busController.busSelect.id}" />
-						
-					<p:dataTable id="datTabBuses"
-						emptyMessage="No existen buses de viaje registrados"
-						value="#{busController.buses}" var="bus" rowKey="#{bus.id}"
-						selectionMode="single" selection="#{busController.busSelect}"
-						paginator="true" rows="10">
+					<p:outputLabel value="Lugar Origen:" for="txtLugarOrigen" />
+					<p:inputText id="txtLugarOrigen" required="true" maxlength="45"
+						value="#{viajeController.viaje.dptoOrigen.nombre}" />
 
-						<p:ajax event="rowSelect" 
-						listener="#{busController.selectBus}" />
+					<p:outputLabel value="Lugar Destino:" for="cboLugarDestino" />
+					<p:selectOneMenu id="cboLugarDestino" required="true" effect="drop"
+						value="#{viajeController.departamentoDestino}"
+						convert="omnifaces.SelectItemsConverter">
 
-						<p:column headerText="Id">
-							<p:outputLabel value="#{bus.id}" />
-						</p:column>
+						<f:selectItem
+							itemLabel="#{viajeController.viaje.dptoDestino.nombre}"
+							noSelectionOption="true" itemValue="" />
 
-						<p:column headerText="Placa">
-							<p:outputLabel value="#{bus.placa}" />
-						</p:column>
+						<f:selectItems value="#{viajeController.departamentos}"
+							var="departamentoDestino" itemLabel="#{departamentoDestino.nombre}"
+							itemValue="#{departamentoDestino}" />
 
-						<p:column headerText="N° de Asientos">
-							<p:outputLabel value="#{bus.asientos}" />
-						</p:column>
+					</p:selectOneMenu>
 
-						<p:column headerText="Disponible">
-							<p:outputLabel value="#{bus.disponible}" />
-						</p:column>
-
-					</p:dataTable>
-
-
-				
 				</p:panelGrid>
 				<br></br>
-
 
 
 			</h:form>
