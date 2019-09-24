@@ -11,9 +11,10 @@ import javax.inject.Named;
 
 import org.primefaces.event.SelectEvent;
 
+import com.hampcode.business.BusBusiness;
 import com.hampcode.business.DepartamentoBusiness;
 import com.hampcode.business.ViajeBusiness;
-
+import com.hampcode.model.entity.Bus;
 import com.hampcode.model.entity.Departamento;
 import com.hampcode.model.entity.Viaje;
 import com.hampcode.util.Message;
@@ -29,37 +30,42 @@ public class ViajeController implements Serializable {
 
 	@Inject
 	private DepartamentoBusiness departamentoBusiness;
+	
+	@Inject
+	private BusBusiness busBusiness;
+	
 
 	private Viaje viaje;
 	private List<Viaje> viajes;
 	private Viaje viajeSelect;
 	private String filterName;
-	private String filterNameOrigen;
+	String filterNameOrigen;
+	
 
-	private Departamento dptoOrigen;
-	private Departamento dptoDestino;
-
-	private List<Departamento> departamentosOrigen;
-	private List<Departamento> departamentosDestino;
+	private Departamento departamentoOrigen;
+	private Departamento departamentoDestino;
+	private List<Departamento> departamentos;
 	private Departamento departamentoSelect;
+	
+	private Bus bus;
+	private List<Bus> buses;
 
 	@PostConstruct
 	public void init() {
 		viaje = new Viaje();
-
-		dptoOrigen = new Departamento();
-		dptoDestino = new Departamento();
+		departamentoOrigen=new Departamento();
+		departamentoDestino=new Departamento();
+		bus = new Bus();
+		
+		
 
 		viajes = new ArrayList<Viaje>();
-
-		departamentosOrigen = new ArrayList<Departamento>();
-		departamentosDestino = new ArrayList<Departamento>();
+		departamentos = new ArrayList<Departamento>();
+	    buses = new ArrayList<Bus>();
 
 		getAllViajes();
-
-		getAllDepartamentosOrigen();
-		getAllDepartamentosDestino();
-
+		getAllDepartamentos();
+		getAllBuses();
 	}
 
 	public String newViaje() {
@@ -76,36 +82,28 @@ public class ViajeController implements Serializable {
 		String view = "";
 		try {
 			if (viaje.getId() != null) {
-
-				viaje.setDptoDestino(dptoDestino);
-				viaje.setDptoOrigen(dptoOrigen);
-
 				viajeBusiness.update(viaje);
 				Message.messageInfo("Registro actualizado exitosamente");
 				view = "list";
-
 			} else {
-				if (dptoDestino.getNombre() == dptoOrigen.getNombre()) {
-					Message.messageError("Origen y Destino no deben ser iguales");
-				} else {
-
-					Departamento dptoDestino = new Departamento();
-
-					viaje.setDptoDestino(dptoDestino);
-					viaje.setDptoOrigen(dptoOrigen);
-
-					viajeBusiness.insert(viaje);
+				if(departamentoDestino.getNombre()==departamentoOrigen.getNombre()) Message.messageError("Origen y Destino no deben ser iguales");
+				else {
+					viaje.setBus(bus);
+					viaje.setDptoDestino(departamentoDestino);
+					viaje.setDptoOrigen(departamentoOrigen);
+					
+					viajeBusiness.insert(viaje);				
 					Message.messageInfo("El viaje se ha registrado exitosamente");
 					view = "list";
 				}
 			}
 			this.getAllViajes();
+			this.getAllBuses();
 			resetForm();
-
+			
 		} catch (Exception e) {
 			Message.messageError("Error Viaje:" + e.getMessage());
 		}
-
 		return view;
 	}
 
@@ -135,23 +133,23 @@ public class ViajeController implements Serializable {
 			Message.messageError("Error Carga de Rutas de Viaje:" + e.getMessage());
 		}
 	}
-
-	public void getAllDepartamentosDestino() {
+	
+	public void getAllDepartamentos() {
 		try {
-			this.departamentosDestino = departamentoBusiness.getAll();
+			this.departamentos= departamentoBusiness.getAll();
 		} catch (Exception e) {
 			Message.messageError("Error Cargar de Departamentos " + e.getMessage());
 		}
 	}
 
-	public void getAllDepartamentosOrigen() {
+	public void getAllBuses() {
 		try {
-			this.departamentosOrigen = departamentoBusiness.getAll();
+			this.buses = busBusiness.getAll();
 		} catch (Exception e) {
-			Message.messageError("Error Cargar de Departamentos " + e.getMessage());
+			Message.messageError("Error Cargar de Buses "+ e.getMessage());
 		}
 	}
-
+	
 	public void selectViaje(SelectEvent e) {
 		this.viajeSelect = (Viaje) e.getObject();
 	}
@@ -205,8 +203,9 @@ public class ViajeController implements Serializable {
 		this.filterName = "";
 		this.filterNameOrigen = "";
 		this.viaje = new Viaje();
-		this.dptoOrigen = new Departamento();
-		this.dptoDestino = new Departamento();
+		this.departamentoOrigen = new Departamento();
+		this.departamentoDestino = new Departamento();
+		this.bus = new Bus();
 	}
 
 	public Viaje getViaje() {
@@ -261,20 +260,47 @@ public class ViajeController implements Serializable {
 		this.departamentoBusiness = departamentoBusiness;
 	}
 
-	public List<Departamento> getDepartamentosOrigen() {
-		return departamentosOrigen;
+	
+	
+
+	public Departamento getDepartamentoOrigen() {
+		return departamentoOrigen;
 	}
 
-	public void setDepartamentosOrigen(List<Departamento> departamentosOrigen) {
-		this.departamentosOrigen = departamentosOrigen;
+	public void setDepartamentoOrigen(Departamento departamentoOrigen) {
+		this.departamentoOrigen = departamentoOrigen;
 	}
 
-	public List<Departamento> getDepartamentosDestino() {
-		return departamentosDestino;
+	public Departamento getDepartamentoDestino() {
+		return departamentoDestino;
 	}
 
-	public void setDepartamentosDestino(List<Departamento> departamentosDestino) {
-		this.departamentosDestino = departamentosDestino;
+	public void setDepartamentoDestino(Departamento departamentoDestino) {
+		this.departamentoDestino = departamentoDestino;
+	}
+
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+
+	public void setDepartamentos(List<Departamento> departamentos) {
+		this.departamentos = departamentos;
+	}
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
+	}
+
+	public List<Bus> getBuses() {
+		return buses;
+	}
+
+	public void setBuses(List<Bus> buses) {
+		this.buses = buses;
 	}
 
 	public Departamento getDepartamentoSelect() {
@@ -285,21 +311,7 @@ public class ViajeController implements Serializable {
 		this.departamentoSelect = departamentoSelect;
 	}
 
-	public Departamento getDptoOrigen() {
-		return dptoOrigen;
-	}
-
-	public void setDptoOrigen(Departamento dptoOrigen) {
-		this.dptoOrigen = dptoOrigen;
-	}
-
-	public Departamento getDptoDestino() {
-		return dptoDestino;
-	}
-
-	public void setDptoDestino(Departamento dptoDestino) {
-		this.dptoDestino = dptoDestino;
-	}
+	
 
 	public String getFilterNameOrigen() {
 		return filterNameOrigen;
