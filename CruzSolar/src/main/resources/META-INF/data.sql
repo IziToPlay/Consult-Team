@@ -1,3 +1,7 @@
+drop table detalles_venta;
+drop table asientos_viajes;
+drop table ventas;
+
 INSERT INTO empleados (nombre,apellido,dni,fechaNacimiento,correo, sexo, celular) VALUES ('José', 'Lovon Vega','74417486','1998-02-17','joslui1720082@gmail.com',true, 982087241);
 INSERT INTO empleados (nombre,apellido,dni,fechaNacimiento,correo, sexo, celular) VALUES ('Miguel Angel', 'Calderon','74417222','1998-03-20','miguelcalderon@gmail.com',true, 998523641);
 INSERT INTO empleados (nombre,apellido,dni,fechaNacimiento,correo, sexo, celular) VALUES ('Alex', 'Meza','744174309','1998-08-02','alexmeza@gmail.com',true, 963647894);
@@ -41,12 +45,11 @@ INSERT INTO viajes (fechaInicio,fechaFinal,precio,bus_id,dptoOrigen_id,dptoDesti
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,bus_id,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-08-12 12:38:00','2019-08-12 23:38:00', 90.00,1, 6,7,3);
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,bus_id,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-09-11 12:38:00','2019-09-12 11:38:00', 80.00,2, 1,8,3);
 
-INSERT INTO asientos_viajes(bus_id,asiento_id,viaje_id,disponible) VALUES (1,1,7,true);
-INSERT INTO asientos_viajes(bus_id,asiento_id,viaje_id,disponible) VALUES (1,3,8,false);
-
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('lovon98','123456',1,1);
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('angelupc','123456',1,2);
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('mezacuba','123456',2,3);
 
-
 INSERT INTO boletas(monto,fechaEmision,cliente_id,viaje_id,empleado_id,asiento_id,bus_id) VALUES (80.00,'2019-08-10 09:03:00',1,1,1,1,5);
+
+
+
