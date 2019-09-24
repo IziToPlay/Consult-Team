@@ -30,25 +30,25 @@
 
 					<p:outputLabel value="Origen" for="cboOrigen" />
 					<p:selectOneMenu id="cboOrigen" required="true" effect="drop"
-						value="#{viajeController.departamentoOrigen}"
+						value="#{viajeController.dptoOrigen}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem itemLabel="Seleccione una opción"
 							noSelectionOption="true" itemValue="" />
 						<f:selectItems value="#{viajeController.departamentos}"
-							var="departamentoOrigen" itemLabel="#{departamentoOrigen.nombre}"
-							itemValue="#{departamentoOrigen}" />
+							var="dptoOrigen" itemLabel="#{dptoOrigen.nombre}"
+							itemValue="#{dptoOrigen}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Destino" for="cboDestino" />
 					<p:selectOneMenu id="cboDestino" required="true" effect="drop"
-						value="#{viajeController.departamentoDestino}"
+						value="#{viajeController.dptoDestino}"
 						converter="omnifaces.SelectItemsConverter">
 						<f:selectItem itemLabel="Seleccione una opción"
 							noSelectionOption="true" itemValue="" />
 						<f:selectItems value="#{viajeController.departamentos}"
-							var="departamentoDestino"
-							itemLabel="#{departamentoDestino.nombre}"
-							itemValue="#{departamentoDestino}" />
+							var="dptoDestino"
+							itemLabel="#{dptoDestino.nombre}"
+							itemValue="#{dptoDestino}" />
 					</p:selectOneMenu>
 					
 					<p:outputLabel value="Bus:" for="txtBus" />

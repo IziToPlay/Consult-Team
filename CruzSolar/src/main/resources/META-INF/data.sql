@@ -1,6 +1,4 @@
-drop table detalles_venta;
-drop table asientos_viajes;
-drop table ventas;
+
 
 INSERT INTO empleados (nombre,apellido,dni,fechaNacimiento,correo, sexo, celular) VALUES ('José', 'Lovon Vega','74417486','1998-02-17','joslui1720082@gmail.com',true, 982087241);
 INSERT INTO empleados (nombre,apellido,dni,fechaNacimiento,correo, sexo, celular) VALUES ('Miguel Angel', 'Calderon','74417222','1998-03-20','miguelcalderon@gmail.com',true, 998523641);

@@ -12,7 +12,7 @@ import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 
 import com.hampcode.business.BoletaBusiness;
-import com.hampcode.model.entity.AsientoViaje;
+//import com.hampcode.model.entity.AsientoViaje;
 import com.hampcode.model.entity.Boleta;
 import com.hampcode.model.entity.Cliente;
 import com.hampcode.model.entity.Departamento;
@@ -34,14 +34,14 @@ public class BoletaController  implements Serializable  {
 	private Boleta boletaSelect;
 	
 	private Empleado empleado;
-	private AsientoViaje asientoViaje;
+	//private AsientoViaje asientoViaje;
 	private Cliente cliente;
 	private Viaje viaje;
 	@PostConstruct
 	public void init() {
 		boleta = new Boleta();
 		empleado=new Empleado();
-		asientoViaje = new AsientoViaje();
+		//asientoViaje = new AsientoViaje();
 		cliente= new Cliente();
 		viaje= new Viaje();
 		boletas=new ArrayList<Boleta>();
@@ -128,13 +128,12 @@ public class BoletaController  implements Serializable  {
 		this.empleado = empleado;
 	}
 
-	public AsientoViaje getAsientoViaje() {
-		return asientoViaje;
-	}
-
-	public void setAsientoViaje(AsientoViaje asientoViaje) {
-		this.asientoViaje = asientoViaje;
-	}
+	/*
+	 * public AsientoViaje getAsientoViaje() { return asientoViaje; }
+	 * 
+	 * public void setAsientoViaje(AsientoViaje asientoViaje) { this.asientoViaje =
+	 * asientoViaje; }
+	 */
 
 	public Cliente getCliente() {
 		return cliente;

@@ -39,14 +39,20 @@ public class ViajeBusiness implements Serializable {
 		return viajeRepository.findAll();
 	}
 	
+	public List<Viaje> getViajesByName(String destino) throws Exception{
+		return viajeRepository.findByName(destino);
+	}
+	
+	public List<Viaje> getViajesByNameOrigen(String origen) throws Exception{
+		return viajeRepository.findByName(origen);
+	}
+	
+	
 	
 	
 	public Optional<Viaje> getViajesById(long id) throws Exception{
 		return viajeRepository.findById(id);
 	}
 	
-	public List<Viaje> getViajesByName(String destino) throws Exception{
-		return viajeRepository.findByName(destino);
-	}
-	
+
 }

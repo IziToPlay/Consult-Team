@@ -12,7 +12,7 @@ import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 
 import com.hampcode.business.ClienteBusiness;
-import com.hampcode.model.entity.AsientoViaje;
+
 import com.hampcode.model.entity.Boleta;
 import com.hampcode.model.entity.Cliente;
 import com.hampcode.model.entity.Empleado;

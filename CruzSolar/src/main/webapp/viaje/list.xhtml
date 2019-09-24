@@ -25,6 +25,15 @@
 					</f:facet>
 				</p:toolbar>
 
+				<p:panelGrid id="panGriBuscadorOrigen" columns="3"
+					style="width:100%">
+					<p:outputLabel value="Buscar Por Origen:" for="txtSearchNameOrigen" />
+					<p:inputText id="txtSearchNameOrigen"
+						value="#{viajeController.filterNameOrigen}" />
+					<p:commandButton icon="ui-icon-search"
+						actionListener="#{viajeController.searchViajeByDptoOrigen}"
+						update=":frm:datTabViajes :frm:men" />
+				</p:panelGrid>
 
 				<p:panelGrid id="panGriBuscador" columns="3" style="width:100%">
 					<p:outputLabel value="Buscar Por Destino:" for="txtSearchName" />
@@ -34,8 +43,6 @@
 						actionListener="#{viajeController.searchViajeByName}"
 						update=":frm:datTabViajes :frm:men" />
 				</p:panelGrid>
-
-
 
 				<p:dataTable id="datTabViajes"
 					emptyMessage="No existen rutas de viaje registradas"

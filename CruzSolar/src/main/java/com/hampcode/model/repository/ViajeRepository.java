@@ -61,9 +61,20 @@ public class ViajeRepository implements Serializable {
 	public List<Viaje> findByName(String destino) throws Exception{
 		List<Viaje> viajes=new ArrayList<>();
 		
-		TypedQuery<Viaje> query=em.createQuery("FROM Viaje v WHERE v.departamentoDestino.name LIKE ?1"
+		TypedQuery<Viaje> query=em.createQuery("FROM Viaje v WHERE v.dptoDestino.nombre LIKE ?1"
 				,Viaje.class);
 		query.setParameter(1, "%"+destino+"%");
+		viajes=query.getResultList();
+		
+		return viajes;
+	}
+	
+	public List<Viaje> findByNameOrigen(String origen) throws Exception{
+		List<Viaje> viajes=new ArrayList<>();
+		
+		TypedQuery<Viaje> query=em.createQuery("FROM Viaje v WHERE v.dptoOrigen.nombre LIKE ?1"
+				,Viaje.class);
+		query.setParameter(1, "%"+origen+"%");
 		viajes=query.getResultList();
 		
 		return viajes;
