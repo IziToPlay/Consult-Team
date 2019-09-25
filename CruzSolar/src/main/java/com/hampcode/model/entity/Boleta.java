@@ -83,4 +83,30 @@ public class Boleta {
 		this.monto = monto;
 	}
 
+	public String getFechaEmision() {
+		return fechaEmision;
+	}
+
+	public void setFechaEmision(String fechaEmision) {
+		this.fechaEmision = fechaEmision;
+	}
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public void setBus(Bus bus) {
+		this.bus = bus;
+	}
+
+	public Asiento getAsiento() {
+		return asiento;
+	}
+
+	public void setAsiento(Asiento asiento) {
+		this.asiento = asiento;
+	}
+
+	
+
 }

@@ -39,4 +39,14 @@ public class AsientoRepository implements Serializable {
 
 		return asientos;
 	}
+	
+	public List<Asiento> findbyBus(long id) throws Exception{
+		List<Asiento> asientos = new ArrayList<>();
+		
+		TypedQuery<Asiento> query = em.createQuery("FROM Asiento a WHERE a.bus.id=?1", Asiento.class);
+		query.setParameter(1, id);
+		asientos=query.getResultList();
+		return asientos;
+		
+	}
 }

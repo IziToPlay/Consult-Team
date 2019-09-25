@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/WEB-INF/templates/master.xhtml">
+		<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men" />
+
+
+                   
+				<p:panelGrid id="panGridProduct" columns="2" style="width:100%">
+				
+				
+					<p:outputLabel value="Fecha de Emisión" for="txtfechaEmisión" />
+					<p:inputText id="txtfechaEmisión" required="true" maxlength="45" disabled="true"
+						value="#{boletaController.boleta.fechaEmision}" />
+						
+					<p:outputLabel value="Nombre del cliente" for="txtNombreCliente" />
+					<p:inputText id="txtNombreCliente" required="true" maxlength="45"
+						value="#{boletaController.boleta.cliente.nombre}" />
+						
+					<p:outputLabel value="Apellido del cliente" for="txtApellidoCliente" />
+					<p:inputText id="txtApellidoCliente" required="true" maxlength="45"
+						value="#{boletaController.boleta.cliente.apellido}" />
+					
+					<p:outputLabel value="ID Viaje" for="txtIdViaje" />
+					<p:inputText id="txtIdViaje" required="true" maxlength="45" disabled="true"
+						value="#{boletaController.boleta.viaje.id}" />
+						
+					<p:outputLabel value="Bus" for="txtBus" />
+					<p:inputText id="txtBus" required="true" maxlength="45" disabled="true"
+						value="#{boletaController.boleta.viaje.bus.placa}" />
+							
+					<p:outputLabel value="Asientos disponibles" for="txtnasientos" />
+					<p:inputText id="txtnasientos" required="true" maxlength="45" disabled="true"
+						value="#{boletaController.boleta.viaje.bus.cantAsiento}" />
+				
+					
+						
+				   </p:panelGrid>
+				   <br></br>
+					
+				
+					
+					
+                 <p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Regresar" icon="ui-icon-disk" 
+						action="#{boletaController.listBoleta()}"
+						ajax="false"/>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+						action="#{boletaController.saveBoleta()}"
+						  ajax="false"/>
+					</f:facet>
+				</p:toolbar>
+				
+				 
+
+							
+				<p:dataTable id="datTabViajes"
+					emptyMessage="No existen rutas de viaje registradas"
+					value="#{viajeController.viajes}" var="viaje"
+					
+					rowKey="#{viaje.id}"
+					selectionMode="single"
+					selection="#{viajeController.viajeSelect}"
+					
+					paginator="true" rows="10">
+
+					<p:ajax event="rowSelect"
+						listener="#{viajeController.selectViaje()}" />
+						
+					<p:column headerText="Id">
+						<p:outputLabel value="#{viaje.id}" />
+					</p:column>
+					<p:column headerText="Fecha Inicio">
+						<p:outputLabel value="#{viaje.fechaInicio}" />
+					</p:column>
+					<p:column headerText="Fecha Final">
+						<p:outputLabel value="#{viaje.fechaFinal}" />
+					</p:column>
+					<p:column headerText="Bus">
+						<p:outputLabel value="#{viaje.bus.id}" />
+					</p:column>
+					<p:column headerText="Precio">
+						<p:outputLabel value="#{viaje.precio}" />
+					</p:column>
+					<p:column headerText="Origen">
+						<p:outputLabel value="#{viaje.dptoOrigen.nombre}" />
+					</p:column>
+					<p:column headerText="Destino">
+						<p:outputLabel value="#{viaje.dptoDestino.nombre}" />
+					</p:column>
+				</p:dataTable>
+
+
+
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

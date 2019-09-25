@@ -48,6 +48,10 @@ INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('angelupc','1234
 INSERT INTO usuarios(nombre,clave,cargo_id,empleado_id) VALUES ('mezacuba','123456',2,3);
 
 INSERT INTO boletas(monto,fechaEmision,cliente_id,viaje_id,empleado_id,asiento_id,bus_id) VALUES (80.00,'2019-08-10 09:03:00',1,1,1,1,5);
+INSERT INTO boletas(monto,fechaEmision,cliente_id,viaje_id,empleado_id,asiento_id,bus_id) VALUES (100.00,'2019-08-10 09:10:00',2,2,1,1,2);
+INSERT INTO boletas(monto,fechaEmision,cliente_id,viaje_id,empleado_id,asiento_id,bus_id) VALUES (100.00,'2019-08-10 10:03:00',3,2,1,2,2);
+
+
 
 
 

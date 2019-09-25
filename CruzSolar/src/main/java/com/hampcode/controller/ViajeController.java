@@ -117,7 +117,7 @@ public class ViajeController implements Serializable {
 		try {
 			if (this.viajeSelect != null) {
 				getAllDepartamentos();
-			getAllBuses();
+			    getAllBuses();
 				this.viaje = viajeSelect;
 				this.viaje.setDptoOrigen(viajeSelect.getDptoOrigen());
 				this.viaje.setDptoDestino(viajeSelect.getDptoDestino());

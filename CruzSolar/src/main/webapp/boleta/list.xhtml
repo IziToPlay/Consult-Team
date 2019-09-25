@@ -16,8 +16,17 @@
 				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton value="Elegir" icon="ui-icon-disk"
-						  action="#{viajeController.searchViajeByName}"
+						  action="#{viajeController.searchViajeByName()}"
 						  ajax="false"/>
+						 
+
+					</f:facet>
+					
+					<f:facet name="left">
+						<p:commandButton value="Ver boletas" icon="ui-icon-disk"
+						  action="#{boletaController.listBoleta()}"
+						  ajax="false"/>
+						 
 
 					</f:facet>
 				</p:toolbar>
@@ -46,7 +55,7 @@
 					paginator="true" rows="10">
 
 					<p:ajax event="rowSelect"
-						listener="#{viajeController.selectViaje}" />
+						listener="#{viajeController.selectViaje()}" />
 						
 					<p:column headerText="Id">
 						<p:outputLabel value="#{viaje.id}" />

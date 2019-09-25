@@ -11,7 +11,9 @@ import javax.inject.Named;
 
 import org.primefaces.event.SelectEvent;
 
+import com.hampcode.business.AsientoBusiness;
 import com.hampcode.business.BoletaBusiness;
+import com.hampcode.model.entity.Asiento;
 //import com.hampcode.model.entity.AsientoViaje;
 import com.hampcode.model.entity.Boleta;
 import com.hampcode.model.entity.Cliente;
@@ -28,24 +30,35 @@ public class BoletaController  implements Serializable  {
 	
 	@Inject
 	private BoletaBusiness boletaBusiness;
-	
+	@Inject
+	private AsientoBusiness asientoBusiness;
 	private Boleta boleta;
+	
+	private Asiento asiento;
+	
 	private List<Boleta> boletas;
 	private Boleta boletaSelect;
-	
 	private Empleado empleado;
 	//private AsientoViaje asientoViaje;
 	private Cliente cliente;
 	private Viaje viaje;
+	//private AsientoController asientoController;
+	private List<Asiento> asientos;
 	@PostConstruct
 	public void init() {
 		boleta = new Boleta();
 		empleado=new Empleado();
+		asiento = new Asiento();
 		//asientoViaje = new AsientoViaje();
 		cliente= new Cliente();
-		viaje= new Viaje();
+		setViaje(new Viaje());
 		boletas=new ArrayList<Boleta>();
-		//getAllBoletas();
+		asientos =new ArrayList<Asiento>();
+		//asientoController= new AsientoController();
+		getAllBoletas();
+		//getAsientosporBus(1); 
+		
+		
 	}
 	
 	public void getAllBoletas() {
@@ -81,13 +94,15 @@ public class BoletaController  implements Serializable  {
 	}
 	
 	public String listBoleta() {
-		resetForm();
-		return "boleta/list.xhtml";
+		return "listboletas.xhtml";
+	}
+	public String listViaje() {
+		return "/boleta/list.xhtml";	
 	}
 	public void resetForm() {
 		this.boleta = new Boleta();
 	}
-
+    
 	public BoletaBusiness getBoletaBusiness() {
 		return boletaBusiness;
 	}
@@ -146,5 +161,53 @@ public class BoletaController  implements Serializable  {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+	public String editBoleta() {
+		String view = "";
+		try {
+			if (this.boletaSelect != null) {
+				this.boleta =  boletaSelect;
+			    getAsientosporBus(boleta.getViaje().getBus().getId());
+				//getAsientosporBus(1);
+				view = "/boleta/update";	
+			} 
+			else {
+				Message.messageInfo("Debe seleccionar una boleta");
+			}
+		} catch (Exception e) {
+			Message.messageError("Error Boleta :" + e.getMessage());
+		}
+		return view;
+	}
+
+	public Viaje getViaje() {
+		return viaje;
+	}
+    public void getAsientosporBus(long id) {
+    	  try {
+  			asientos = asientoBusiness.getAsientosByBus(id);
+  		 } catch (Exception e) {
+  			Message.messageError("Error Asiento :" + e.getMessage());
+  		}
+    }
+	public void setViaje(Viaje viaje) {
+		this.viaje = viaje;
+	}
+
+
+
+	public List<Asiento> getAsientos() {
+		return asientos;
+	}
+
+	public void setAsientos(List<Asiento> asientos) {
+		this.asientos = asientos;
+	}
+
+	public Asiento getAsiento() {
+		return asiento;
+	}
+
+	public void setAsiento(Asiento asiento) {
+		this.asiento = asiento;
+	}
 }

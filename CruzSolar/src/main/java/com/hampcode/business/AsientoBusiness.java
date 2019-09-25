@@ -36,4 +36,7 @@ public class AsientoBusiness implements Serializable {
 	public List<Asiento> getAll() throws Exception {
 		return asientoRepository.findAll();
 	}
+	public List<Asiento> getAsientosByBus(long id) throws Exception{
+		return asientoRepository.findbyBus(id);
+	}
 }
