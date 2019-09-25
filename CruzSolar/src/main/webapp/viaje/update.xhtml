@@ -36,9 +36,17 @@
 					<p:inputText id="txtFechaFinal" required="true" maxlength="45"
 						value="#{viajeController.viaje.fechaFinal}" />
 
-					<p:outputLabel value="Bus:" for="txtBus" />
-					<p:inputText id="txtBus" required="true" maxlength="45"
-						value="#{viajeController.viaje.bus.id}" />
+					<p:outputLabel value="Bus" for="cboBus" />
+					<p:selectOneMenu id="cboBus" required="true" effect="drop"
+						value="#{viajeController.bus}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Seleccione una opción"
+							noSelectionOption="true" itemValue="" />
+						<f:selectItems value="#{viajeController.buses}"
+							var="bus"
+							itemLabel="#{bus.placa}"
+							itemValue="#{bus}" />
+					</p:selectOneMenu>
 
 					<p:outputLabel value="Precio:" for="txtPrecio" />
 					<p:inputText id="txtPrecio" required="true" maxlength="45"
@@ -59,15 +67,16 @@
 					<p:selectOneMenu id="cboDestino" required="true" effect="drop"
 						value="#{viajeController.departamentoDestino}"
 						converter="omnifaces.SelectItemsConverter">
+						
 						<f:selectItem itemLabel="Seleccione una opción"
 							noSelectionOption="true" itemValue="" />
+							
 						<f:selectItems value="#{viajeController.departamentos}"
 							var="departamentoDestino"
 							itemLabel="#{departamentoDestino.nombre}"
 							itemValue="#{departamentoDestino}" />
+							
 					</p:selectOneMenu>
-
-					
 
 				</p:panelGrid>
 				<br></br>

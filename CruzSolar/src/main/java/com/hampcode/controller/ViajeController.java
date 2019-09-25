@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Convert;
 
 import org.primefaces.event.SelectEvent;
 
@@ -30,38 +31,34 @@ public class ViajeController implements Serializable {
 
 	@Inject
 	private DepartamentoBusiness departamentoBusiness;
-	
+
 	@Inject
 	private BusBusiness busBusiness;
-	
 
 	private Viaje viaje;
 	private List<Viaje> viajes;
 	private Viaje viajeSelect;
 	private String filterName;
 	String filterNameOrigen;
-	
 
 	private Departamento departamentoOrigen;
 	private Departamento departamentoDestino;
 	private List<Departamento> departamentos;
 	private Departamento departamentoSelect;
-	
+
 	private Bus bus;
 	private List<Bus> buses;
 
 	@PostConstruct
 	public void init() {
 		viaje = new Viaje();
-		departamentoOrigen=new Departamento();
-		departamentoDestino=new Departamento();
+		departamentoOrigen = new Departamento();
+		departamentoDestino = new Departamento();
 		bus = new Bus();
-		
-		
 
 		viajes = new ArrayList<Viaje>();
 		departamentos = new ArrayList<Departamento>();
-	    buses = new ArrayList<Bus>();
+		buses = new ArrayList<Bus>();
 
 		getAllViajes();
 		getAllDepartamentos();
@@ -82,31 +79,47 @@ public class ViajeController implements Serializable {
 		String view = "";
 		try {
 			if (viaje.getId() != null) {
-				
-				
-				viaje.setDptoDestino(departamentoDestino);
-				viaje.setDptoOrigen(departamentoOrigen);
-				
-				viajeBusiness.update(viaje);
-				Message.messageInfo("Registro actualizado exitosamente");
-				view = "list";
+				if (viaje.getFechaFinal().toString() != "" && viaje.getFechaInicio().toString() != "") {
+					if (viaje.getPrecio() > 0) {
+						if (departamentoDestino.getNombre() == departamentoOrigen.getNombre())
+							Message.messageError("Origen y Destino no deben ser iguales");
+						else {
+							viaje.setBus(bus);
+							viaje.setDptoDestino(departamentoDestino);
+							viaje.setDptoOrigen(departamentoOrigen);
+							
+							viajeBusiness.update(viaje);
+							Message.messageInfo("Registro actualizado exitosamente");
+							view = "list";
+							resetForm();
+						}
+					} else {
+						Message.messageInfo("El valor del precio debe ser mayor a 0");
+					}
+				}
+				else {
+					Message.messageInfo("Rellene los campos faltantes");
+				}
 			} else {
-				if(departamentoDestino.getNombre()==departamentoOrigen.getNombre()) Message.messageError("Origen y Destino no deben ser iguales");
+				if (departamentoDestino.getNombre() == departamentoOrigen.getNombre())
+					Message.messageError("Origen y Destino no deben ser iguales");
 				else {
 					viaje.setBus(bus);
 					viaje.setDptoDestino(departamentoDestino);
 					viaje.setDptoOrigen(departamentoOrigen);
-					
-					viajeBusiness.insert(viaje);				
+
+					viajeBusiness.insert(viaje);
 					Message.messageInfo("El viaje se ha registrado exitosamente");
 					view = "list";
+					resetForm();
 				}
 			}
 			this.getAllViajes();
 			this.getAllBuses();
-			resetForm();
-			
-		} catch (Exception e) {
+
+		} catch (
+
+		Exception e) {
 			Message.messageError("Error Viaje:" + e.getMessage());
 		}
 		return view;
@@ -117,7 +130,11 @@ public class ViajeController implements Serializable {
 		try {
 			if (this.viajeSelect != null) {
 				getAllDepartamentos();
+<<<<<<< HEAD
 			    getAllBuses();
+=======
+				getAllBuses();
+>>>>>>> d9fdde43c4f5481d0cacde203c304e3d433a6abd
 				this.viaje = viajeSelect;
 				this.viaje.setDptoOrigen(viajeSelect.getDptoOrigen());
 				this.viaje.setDptoDestino(viajeSelect.getDptoDestino());
@@ -140,10 +157,10 @@ public class ViajeController implements Serializable {
 			Message.messageError("Error Carga de Rutas de Viaje:" + e.getMessage());
 		}
 	}
-	
+
 	public void getAllDepartamentos() {
 		try {
-			this.departamentos= departamentoBusiness.getAll();
+			this.departamentos = departamentoBusiness.getAll();
 		} catch (Exception e) {
 			Message.messageError("Error Cargar de Departamentos " + e.getMessage());
 		}
@@ -153,10 +170,10 @@ public class ViajeController implements Serializable {
 		try {
 			this.buses = busBusiness.getAll();
 		} catch (Exception e) {
-			Message.messageError("Error Cargar de Buses "+ e.getMessage());
+			Message.messageError("Error Cargar de Buses " + e.getMessage());
 		}
 	}
-	
+
 	public void selectViaje(SelectEvent e) {
 		this.viajeSelect = (Viaje) e.getObject();
 	}
@@ -267,9 +284,6 @@ public class ViajeController implements Serializable {
 		this.departamentoBusiness = departamentoBusiness;
 	}
 
-	
-	
-
 	public Departamento getDepartamentoOrigen() {
 		return departamentoOrigen;
 	}
@@ -317,8 +331,6 @@ public class ViajeController implements Serializable {
 	public void setDepartamentoSelect(Departamento departamentoSelect) {
 		this.departamentoSelect = departamentoSelect;
 	}
-
-	
 
 	public String getFilterNameOrigen() {
 		return filterNameOrigen;
