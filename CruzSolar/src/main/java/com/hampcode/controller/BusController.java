@@ -78,4 +78,8 @@ public class BusController implements Serializable {
 		this.busSelect = busSelect;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

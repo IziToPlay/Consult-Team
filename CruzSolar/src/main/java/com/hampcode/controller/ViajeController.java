@@ -34,12 +34,16 @@ public class ViajeController implements Serializable {
 
 	@Inject
 	private BusBusiness busBusiness;
+	
+	@Inject
+	private AsientoController asientoController;
 
 	private Viaje viaje;
 	private List<Viaje> viajes;
 	private Viaje viajeSelect;
 	private String filterName;
-	String filterNameOrigen;
+	private String filterNameOrigen;
+	private Long busID;
 
 	private Departamento departamentoOrigen;
 	private Departamento departamentoDestino;
@@ -65,13 +69,13 @@ public class ViajeController implements Serializable {
 		getAllBuses();
 	}
 
-	public String newViaje() {
+	public String newViaje() {		
 		resetForm();
-		return "new.xhtml";
+		return "/viaje/new.xhtml";
 	}
 
 	public String listViaje() {
-		return "list.xhtml";
+		return "/viaje/list.xhtml";
 	}
 
 	public String saveViaje() throws Exception {
@@ -101,8 +105,9 @@ public class ViajeController implements Serializable {
 					Message.messageInfo("Rellene los campos faltantes");
 				}
 			} else {
-				if (departamentoDestino.getNombre() == departamentoOrigen.getNombre())
+				if (departamentoDestino.getNombre() == departamentoOrigen.getNombre()) {
 					Message.messageError("Origen y Destino no deben ser iguales");
+				}
 				else {
 					viaje.setBus(bus);
 					viaje.setDptoDestino(departamentoDestino);
@@ -117,9 +122,7 @@ public class ViajeController implements Serializable {
 			this.getAllViajes();
 			this.getAllBuses();
 
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			Message.messageError("Error Viaje:" + e.getMessage());
 		}
 		return view;
@@ -130,11 +133,11 @@ public class ViajeController implements Serializable {
 		try {
 			if (this.viajeSelect != null) {
 				getAllDepartamentos();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 			    getAllBuses();
-=======
+//=======
 				getAllBuses();
->>>>>>> d9fdde43c4f5481d0cacde203c304e3d433a6abd
+//>>>>>>> d9fdde43c4f5481d0cacde203c304e3d433a6abd
 				this.viaje = viajeSelect;
 				this.viaje.setDptoOrigen(viajeSelect.getDptoOrigen());
 				this.viaje.setDptoDestino(viajeSelect.getDptoDestino());
@@ -150,6 +153,32 @@ public class ViajeController implements Serializable {
 		return view;
 	}
 
+	// Seleccionar ruta de viaje para enlazarla a la boleta (Rol: Recepcionista)
+		public String enlazarViaje() {
+			String view = "";
+			try {
+				if (this.viajeSelect != null) {
+					this.viaje = viajeSelect;
+					view = "/boleta/insert.xhtml";
+					Message.messageInfo("Ruta de viaje seleccionada correctamente");
+				} else {
+					Message.messageInfo("Debe seleccionar una ruta de viaje");
+				}
+
+			} catch (Exception e) {
+				Message.messageError("Error Viaje:" + e.getMessage());
+			}
+			return view;
+		}
+		
+		
+		//Metodo para enlazar Viaje con Asiento (Se usa en el AsientoController)
+		public Long EnlazarViajeConAsiento() {
+			
+			busID=this.viaje.getBus().getId();
+			return busID;
+		}
+		
 	public void getAllViajes() {
 		try {
 			viajes = viajeBusiness.getAll();
@@ -184,31 +213,40 @@ public class ViajeController implements Serializable {
 			if (this.viajeSelect != null) {
 				this.viaje = viajeSelect;
 				viajes.remove(viaje);
-
-				Message.messageInfo("Registro eliminado correctamente");
+				view = "/viaje/list.xhtml";
+				Message.messageInfo("Ruta de viaje eliminada correctamente");
 			} else {
 				Message.messageInfo("Debe seleccionar una ruta de viaje");
 			}
-			this.getAllViajes();
-			view = "list";
+			//this.getAllViajes();
+			
 		} catch (Exception e) {
 			Message.messageError("Error Ruta de Viaje: " + e.getStackTrace());
 		}
 		return view;
 	}
 
-	public void searchViajeByName() {
-		try {
+	//Buscar ruta de viaje por Destino (Rol: Consultor de Viajes, Recepcionista)
+		public void searchViajeByName() {
+			try {
+				if(filterName.isEmpty()== true) {
+					
+					Message.messageInfo("Debe completar los campos de busqueda");
 
-			viajes = viajeBusiness.getViajesByName(this.filterName.trim());
-			resetForm();
-			if (viajes.isEmpty()) {
-				Message.messageInfo("No se encontraron viajes");
+					}else {
+						if (viajes.isEmpty()==false) {
+							viajes = viajeBusiness.getViajesByName(this.filterName.trim());
+							resetForm();
+							Message.messageInfo("Búsqueda realizada correctamente");
+							}else{
+								Message.messageInfo("No se han encontrado coincidencias");
+								getAllViajes();
+							}
+					}
+			} catch (Exception e) {
+				Message.messageError("Error Viaje Search :" + e.getMessage());
 			}
-		} catch (Exception e) {
-			Message.messageError("Error Viaje Search :" + e.getMessage());
 		}
-	}
 
 	public void searchViajeByDptoOrigen() {
 		try {
@@ -338,6 +376,30 @@ public class ViajeController implements Serializable {
 
 	public void setFilterNameOrigen(String filterNameOrigen) {
 		this.filterNameOrigen = filterNameOrigen;
+	}
+
+	public BusBusiness getBusBusiness() {
+		return busBusiness;
+	}
+
+	public void setBusBusiness(BusBusiness busBusiness) {
+		this.busBusiness = busBusiness;
+	}
+
+	public AsientoController getAsientoController() {
+		return asientoController;
+	}
+
+	public void setAsientoController(AsientoController asientoController) {
+		this.asientoController = asientoController;
+	}
+
+	public Long getBusID() {
+		return busID;
+	}
+
+	public void setBusID(Long busID) {
+		this.busID = busID;
 	}
 
 }

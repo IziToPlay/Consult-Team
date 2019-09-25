@@ -20,34 +20,110 @@
 						ajax="false"/>
 						<p:commandButton value="Regresar" icon="ui-icon-disk"
 						action="#{boletaController.listViaje()}"
-						  ajax="false"/>		
+						immediate="true"
+						ajax="false"/>		
 
 					</f:facet>
 				</p:toolbar>
-
-
-			<p:panelGrid id="panGridViajes" columns="1" style="width:100%">
+							
+				<p:panelGrid id="panGridBoletas" columns="2" style="width:100%">
+						
+				 					
 					<p:outputLabel value="Viaje:" for="txtViaje" />
-					<p:inputText id="txtViaje" required="true" maxlength="45"
-						value="#{boletaController.viaje.id}" />
-					
-					<p:outputLabel value="Nombre:" for="txtNombre" />
-					<p:inputText id="txtNombre" required="true" maxlength="45"
-						value="#{boletaController.viaje.fechaInicio}" />
-
-					<p:outputLabel value="Fecha Final:" for="txtFechaFinal" />
-					<p:inputText id="txtApellido" required="true" maxlength="45"
-						value="#{viajeController.viaje.fechaFinal}" />
-
-					<p:outputLabel value="Precio:" for="txtPrecio" />
-					<p:inputText id="txtPrecio" required="true" maxlength="45"
+					<p:inputText id="txtViaje" required="false" maxlength="45"
+						value="#{viajeController.viaje.id}" />
+						
+					<p:outputLabel value="Monto:" for="txtMonto" />
+					<p:inputText id="txtMonto" required="true" maxlength="45"
 						value="#{viajeController.viaje.precio}" />
-
+						
 					<p:outputLabel value="Bus:" for="txtBus" />
 					<p:inputText id="txtBus" required="true" maxlength="45"
-						value="#{busController.busSelect.id}" />
+						value="#{viajeController.viaje.bus.id}" />
+						
+				<p:outputLabel value="Cliente ID:" for="txtCliente" />
+					<p:inputText id="txtCliente" required="false" maxlength="45"
+						value="#{clienteController.cliente.id}" />
+				
+				<p:outputLabel value="Fecha de Emision:" for="txtFechaEmision" />
+					<p:inputText id="txtFechaEmision" required="false" maxlength="45"
+						value="#{boletaController.boleta.fechaEmision}" />
+					
+					<p:outputLabel value="Asiento" for="cboAsiento" />
+					<p:selectOneMenu id="cboAsiento" required="false" effect="drop"
+						value="#{asientoController.asiento}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Selecciona un asiento"
+						noSelectionOption="true" itemValue="" />
+						<f:selectItems value="#{asientoController.asientos}"
+							var="asiento" itemLabel="#{asiento.numero}"
+							itemValue="#{asiento}" />
+					</p:selectOneMenu>
+														
+					</p:panelGrid>
+				
+
+				<p:panelGrid id="panGriBuscador" columns="4" style="width:100%">
+				
+					<p:outputLabel value="Buscar por DNI:" for="txtSearchName" />
+					<p:inputText id="txtSearchName"  value="#{clienteController.filterName}" />
+					
+					<p:commandButton value="Buscar" icon="ui-icon-search" 
+					  actionListener="#{clienteController.searchClienteByDNI()}"
+					  inmediate="true"
+					  update=":frm:datTabClientes :frm:men"/>
+					
+					<p:commandButton value="Seleccionar" icon="ui-icon-disk"
+					  actionListener="#{boletaController.enlazarCliente()}"
+					  immediate="true"
+					  update=":frm:txtCliente :frm:men"/>			  
+					
+				</p:panelGrid>
+				
+				<p:dataTable id="datTabClientes"
+					emptyMessage="No existen clientes registrados"
+					value="#{clienteController.clientes}" var="cliente"
+					
+					rowKey="#{cliente.id}"
+					selectionMode="single"
+					selection="#{clienteController.clienteSelect}"
+					
+					paginator="true" rows="10">
+
+					<p:ajax event="rowSelect"
+						listener="#{clienteController.selectCliente}" />
+						
+					<p:column headerText="Id">
+						<p:outputLabel value="#{cliente.id}" />
+					</p:column>
+					
+					<p:column headerText="Nombre">
+						<p:outputLabel value="#{cliente.nombre}" />
+					</p:column>
+					
+					<p:column headerText="Apellido">
+						<p:outputLabel value="#{cliente.apellido}" />
+					</p:column>
+					
+					<p:column headerText="DNI">
+						<p:outputLabel value="#{cliente.dni}" />
+					</p:column>
+					
+					<p:column headerText="Fecha Nacimiento">
+						<p:outputLabel value="#{cliente.fechaNacimiento}" />
+					</p:column>
+					
+					<p:column headerText="Celular">
+						<p:outputLabel value="#{cliente.celular}" />
+					</p:column>
+					
+					<p:column headerText="Correo">
+						<p:outputLabel value="#{cliente.correo}" />
+					</p:column>
+					
+				</p:dataTable>
+											
 			
-			</p:panelGrid>
 				<br></br>
 
 

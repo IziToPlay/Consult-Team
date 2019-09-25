@@ -15,8 +15,8 @@
 				
 				<p:toolbar>
 					<f:facet name="right">
-						<p:commandButton value="Elegir" icon="ui-icon-disk"
-						  action="#{viajeController.searchViajeByName()}"
+						<p:commandButton value="Seleccionar" icon="ui-icon-disk"
+						  action="#{viajeController.enlazarViaje()}"
 						  ajax="false"/>
 						 
 
@@ -40,10 +40,6 @@
 					  
 				</p:panelGrid>
 				
-					  
-				
-				
-							
 				<p:dataTable id="datTabViajes"
 					emptyMessage="No existen rutas de viaje registradas"
 					value="#{viajeController.viajes}" var="viaje"
@@ -55,29 +51,40 @@
 					paginator="true" rows="10">
 
 					<p:ajax event="rowSelect"
-						listener="#{viajeController.selectViaje()}" />
+						listener="#{viajeController.selectViaje}" />
 						
 					<p:column headerText="Id">
 						<p:outputLabel value="#{viaje.id}" />
 					</p:column>
-					<p:column headerText="Fecha Inicio">
-						<p:outputLabel value="#{viaje.fechaInicio}" />
-					</p:column>
-					<p:column headerText="Fecha Final">
-						<p:outputLabel value="#{viaje.fechaFinal}" />
-					</p:column>
+					
 					<p:column headerText="Bus">
 						<p:outputLabel value="#{viaje.bus.id}" />
 					</p:column>
+					
+					<p:column headerText="Fecha Inicio">
+						<p:outputLabel value="#{viaje.fechaInicio}" />
+					</p:column>
+					
+					<p:column headerText="Fecha Final">
+						<p:outputLabel value="#{viaje.fechaFinal}" />
+					</p:column>
+					
 					<p:column headerText="Precio">
 						<p:outputLabel value="#{viaje.precio}" />
 					</p:column>
+					
 					<p:column headerText="Origen">
 						<p:outputLabel value="#{viaje.dptoOrigen.nombre}" />
 					</p:column>
+					
 					<p:column headerText="Destino">
 						<p:outputLabel value="#{viaje.dptoDestino.nombre}" />
 					</p:column>
+					
+					<p:column headerText="Asientos">
+						<p:outputLabel value="#{viaje.bus.cantAsiento}" />
+					</p:column>
+					
 				</p:dataTable>
 				
 				

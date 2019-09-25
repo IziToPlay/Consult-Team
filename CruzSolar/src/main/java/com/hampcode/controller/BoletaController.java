@@ -30,16 +30,21 @@ public class BoletaController  implements Serializable  {
 	
 	@Inject
 	private BoletaBusiness boletaBusiness;
+	
 	@Inject
 	private AsientoBusiness asientoBusiness;
+	
+	@Inject
+	private ClienteController clienteController;
+	
+	@Inject 
+	private ViajeController viajeController;
+	
 	private Boleta boleta;
-	
 	private Asiento asiento;
-	
 	private List<Boleta> boletas;
 	private Boleta boletaSelect;
 	private Empleado empleado;
-	//private AsientoViaje asientoViaje;
 	private Cliente cliente;
 	private Viaje viaje;
 	//private AsientoController asientoController;
@@ -49,9 +54,9 @@ public class BoletaController  implements Serializable  {
 		boleta = new Boleta();
 		empleado=new Empleado();
 		asiento = new Asiento();
-		//asientoViaje = new AsientoViaje();
 		cliente= new Cliente();
-		setViaje(new Viaje());
+		viaje=new Viaje();
+		//setViaje(new Viaje());
 		boletas=new ArrayList<Boleta>();
 		asientos =new ArrayList<Asiento>();
 		//asientoController= new AsientoController();
@@ -69,36 +74,53 @@ public class BoletaController  implements Serializable  {
 		}
 	}
 
+	public void enlazarCliente() {
+		//resetForm();
+		this.clienteController.enlazarCliente();
+		//resetForm();
+	}
+	
 	public String saveBoleta() {
 		String view = "";
 		try {
 			if (boleta.getId() != null) {
+				boleta.setAsiento(asiento);
 				boletaBusiness.update(boleta);
 				Message.messageInfo("Boleta de viaje actualizada correctamente");
+				view = "listboletas.xhtml";
+				return view;
 			} else {
 				boletaBusiness.insert(boleta);
 				Message.messageInfo("Boleta de viaje registrada correctamente");
 			}
 			this.getAllBoletas();
 			resetForm();
-			view = "boleta/list.xhtml";
+			view = "/boleta/list.xhtml";
 		} catch (Exception e) {
+			Message.messageInfo("Rellene los campos faltantes");
 			Message.messageError("Error Boleta de Viaje:" + e.getMessage());
 		}
 		return view;
 	}
 	
+	// Ir a vista Registrar Boleta y registrarla
 	public String newBoleta() {
 		resetForm();
-		return "boleta/insert.xhtml";
+		return "/boleta/insert.xhtml";
 	}
 	
+	// Ir a vista Listar Viajes y verlas todas
+		public String listViaje() {
+			//resetForm();
+			return "/boleta/list.xhtml";	
+		}
+		
+	// Ir a vista Listar Boletas y verlas todas
 	public String listBoleta() {
-		return "listboletas.xhtml";
+		return "/boleta/listboletas.xhtml";
 	}
-	public String listViaje() {
-		return "/boleta/list.xhtml";	
-	}
+	
+	// Inicializar nueva boleta a crear
 	public void resetForm() {
 		this.boleta = new Boleta();
 	}
@@ -209,5 +231,13 @@ public class BoletaController  implements Serializable  {
 
 	public void setAsiento(Asiento asiento) {
 		this.asiento = asiento;
+	}
+
+	public AsientoBusiness getAsientoBusiness() {
+		return asientoBusiness;
+	}
+
+	public void setAsientoBusiness(AsientoBusiness asientoBusiness) {
+		this.asientoBusiness = asientoBusiness;
 	}
 }

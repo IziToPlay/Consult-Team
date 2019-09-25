@@ -26,13 +26,33 @@ INSERT INTO buses (placa,cantAsiento) VALUES ('AXH165', 40);
 INSERT INTO buses (placa,cantAsiento) VALUES ('FJB635', 40);
 INSERT INTO buses (placa,cantAsiento) VALUES ('BVR365', 40);
 
-INSERT INTO asientos(piso,bus_id) VALUES (1,1);
-INSERT INTO asientos(piso,bus_id) VALUES (1,2);
-INSERT INTO asientos(piso,bus_id) VALUES (2,1);
-INSERT INTO asientos(piso,bus_id) VALUES (2,1);
-INSERT INTO asientos(piso,bus_id) VALUES (2,1);
-INSERT INTO asientos(piso,bus_id) VALUES (2,1);
-INSERT INTO asientos(piso,bus_id) VALUES (2,1);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,1,true,1);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,1,true,2);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,1,true,3);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,1,true,4);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,1,true,5);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,2,true,1);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,2,true,2);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,2,true,3);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,2,true,4);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,2,true,5);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,3,true,1);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,3,true,2);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,3,true,3);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,3,true,4);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,3,true,5);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,4,true,1);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,4,true,2);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,4,true,3);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,4,true,4);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,4,true,5);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,5,true,1);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,5,true,2);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,5,true,3);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,5,true,4);
+INSERT INTO asientos(piso,bus_id,disponible,numero) VALUES (1,5,true,5);
+
+
 
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,bus_id,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-12-30 12:38:00','2019-12-30 20:38:00', 48.00,1, 1,2,3);
 INSERT INTO viajes (fechaInicio,fechaFinal,precio,bus_id,dptoOrigen_id,dptoDestino_id,empleado_id) VALUES ('2019-12-10 07:00:00','2019-12-11 13:38:00', 100.00,2, 1,3,3);

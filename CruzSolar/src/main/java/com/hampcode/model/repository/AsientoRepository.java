@@ -40,7 +40,8 @@ public class AsientoRepository implements Serializable {
 		return asientos;
 	}
 	
-	public List<Asiento> findbyBus(long id) throws Exception{
+	//Buscar asientos del bus, según mismo bus entre viaje y asiento
+	public List<Asiento> findByBus(Long id) throws Exception{
 		List<Asiento> asientos = new ArrayList<>();
 		
 		TypedQuery<Asiento> query = em.createQuery("FROM Asiento a WHERE a.bus.id=?1", Asiento.class);

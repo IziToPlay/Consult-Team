@@ -31,6 +31,7 @@ public class ViajeRepository implements Serializable {
 		em.remove(viaje);
 	}
 	
+	//Listar todas las rutas de viaje
 	public List<Viaje> findAll() throws Exception{
 		List<Viaje> viajes=new ArrayList<>();
 		

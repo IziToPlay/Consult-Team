@@ -39,5 +39,15 @@ public class ClienteRepository implements Serializable {
 		
 		return clientes;
 	}
+	
+	public List<Cliente> findByDNI(String dni) throws Exception{
+		List<Cliente> clientes=new ArrayList<>();
+		
+		TypedQuery<Cliente> query=em.createQuery("FROM Cliente c WHERE c.dni LIKE ?1",Cliente.class);
+		query.setParameter(1, "%"+dni+"%");
+		clientes=query.getResultList();
+		
+		return clientes;
+	}
 
 }

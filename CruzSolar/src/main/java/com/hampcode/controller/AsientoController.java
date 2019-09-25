@@ -15,6 +15,7 @@ import com.hampcode.business.AsientoBusiness;
 import com.hampcode.business.BusBusiness;
 import com.hampcode.model.entity.Asiento;
 import com.hampcode.model.entity.Bus;
+import com.hampcode.model.entity.Viaje;
 import com.hampcode.util.Message;
 
 @Named
@@ -23,13 +24,19 @@ import com.hampcode.util.Message;
 public class AsientoController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private AsientoBusiness asientoBusiness;
+	
+	@Inject
+	private ViajeController viajeController;
+	
 	private Asiento asiento;
 	private List<Asiento> asientos;
 	private Asiento asientoSelect;
-	
-	int busidfilter;
+	private Viaje viaje;
+	private Long filterBusID;
+	Long busidfilter;
 	
 	@PostConstruct
 	public void init() {
@@ -47,11 +54,11 @@ public class AsientoController implements Serializable {
 		}
 	}
 	
-	public void getAsientosByBus(long id) {
+	public void getAsientosByBus(Long id) {
          try {
 			asientos = asientoBusiness.getAsientosByBus(id);
 		 } catch (Exception e) {
-			Message.messageError("Error Asiento :" + e.getMessage());
+			Message.messageError("Error Cargas de Asientos:" + e.getMessage());
 		}
 	}
 	
@@ -93,6 +100,38 @@ public class AsientoController implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public ViajeController getViajeController() {
+		return viajeController;
+	}
+
+	public void setViajeController(ViajeController viajeController) {
+		this.viajeController = viajeController;
+	}
+
+	public Viaje getViaje() {
+		return viaje;
+	}
+
+	public void setViaje(Viaje viaje) {
+		this.viaje = viaje;
+	}
+
+	public Long getFilterBusID() {
+		return filterBusID;
+	}
+
+	public void setFilterBusID(Long filterBusID) {
+		this.filterBusID = filterBusID;
+	}
+
+	public Long getBusidfilter() {
+		return busidfilter;
+	}
+
+	public void setBusidfilter(Long busidfilter) {
+		this.busidfilter = busidfilter;
 	}
 
 	

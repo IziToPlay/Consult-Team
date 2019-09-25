@@ -35,6 +35,7 @@ public class ViajeBusiness implements Serializable {
 		 viajeRepository.delete(viaje);
 	}
 	
+	//Listar todas las rutas de viaje
 	public List<Viaje> getAll() throws Exception {
 		return viajeRepository.findAll();
 	}
@@ -44,11 +45,8 @@ public class ViajeBusiness implements Serializable {
 	}
 	
 	public List<Viaje> getViajesByNameOrigen(String origen) throws Exception{
-		return viajeRepository.findByName(origen);
+		return viajeRepository.findByNameOrigen(origen);
 	}
-	
-	
-	
 	
 	public Optional<Viaje> getViajesById(long id) throws Exception{
 		return viajeRepository.findById(id);

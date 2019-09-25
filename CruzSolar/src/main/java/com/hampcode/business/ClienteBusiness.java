@@ -37,4 +37,8 @@ public class ClienteBusiness implements Serializable {
 		return clienteRepository.findAll();
 	}
 	
+	public List<Cliente> getClienteByDNI(String dni) throws Exception{
+		return clienteRepository.findByDNI(dni);
+	}
+	
 }

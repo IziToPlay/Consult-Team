@@ -23,6 +23,12 @@ public class Asiento {
 	@ManyToOne
 	@JoinColumn(name = "bus_id")
 	private Bus bus;
+	
+	@Column(name = "disponible", nullable = false)
+	private Boolean disponible;
+	
+	@Column(name = "numero", nullable = false)
+	private int numero;
 
 	public Bus getBus() {
 		return bus;
@@ -46,5 +52,21 @@ public class Asiento {
 
 	public void setPiso(int piso) {
 		this.piso = piso;
+	}
+
+	public Boolean getDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 }
