@@ -36,7 +36,7 @@
 							noSelectionOption="true" itemValue="" />
 						<f:selectItems value="#{viajeController.departamentos}"
 							var="departamentoOrigen" itemLabel="#{departamentoOrigen.nombre}"
-							itemValue="#{departamentoOrigen}" />
+							itemValue="#{departamento}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Destino" for="cboDestino" />
@@ -62,7 +62,7 @@
 							itemLabel="#{bus.placa}"
 							itemValue="#{bus}" />
 					</p:selectOneMenu>
-
+                    
 					<p:outputLabel value="Precio" for="txtPrecio" />
 					<p:inputText id="txtPrecio" required="true" maxlength="45"
 						value="#{viajeController.viaje.precio}" />

@@ -82,6 +82,11 @@ public class ViajeController implements Serializable {
 		String view = "";
 		try {
 			if (viaje.getId() != null) {
+				
+				
+				viaje.setDptoDestino(departamentoDestino);
+				viaje.setDptoOrigen(departamentoOrigen);
+				
 				viajeBusiness.update(viaje);
 				Message.messageInfo("Registro actualizado exitosamente");
 				view = "list";
@@ -111,6 +116,8 @@ public class ViajeController implements Serializable {
 		String view = "";
 		try {
 			if (this.viajeSelect != null) {
+				getAllDepartamentos();
+			getAllBuses();
 				this.viaje = viajeSelect;
 				this.viaje.setDptoOrigen(viajeSelect.getDptoOrigen());
 				this.viaje.setDptoDestino(viajeSelect.getDptoDestino());
